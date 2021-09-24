@@ -53,7 +53,7 @@
             android:textSize="@dimen/intro_text_size" />
 
         <!-- Button: Sign in -->
-        <Button
+        <android.widget.Button
             android:id="@+id/btn_sign_in_intro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
             android:textSize="@dimen/btn_text_size" />
 
         <!-- Button: Sign up -->
-        <Button
+        <android.widget.Button
             android:id="@+id/btn_sign_up_intro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
