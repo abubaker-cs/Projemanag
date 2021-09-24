@@ -17,5 +17,7 @@ class MainActivity : AppCompatActivity() {
         // Inflate Layout (XML)
         binding = DataBindingUtil.setContentView(this@MainActivity, R.layout.activity_main)
 
+
+
     }
 }

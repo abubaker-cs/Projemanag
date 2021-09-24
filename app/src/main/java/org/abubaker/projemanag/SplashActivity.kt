@@ -1,8 +1,10 @@
 package org.abubaker.projemanag
 
+import android.content.Intent
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
@@ -41,6 +43,25 @@ class SplashActivity : AppCompatActivity() {
         // Carbon Font Family: https://www.1001fonts.com/carbon-font.html
         val typeface: Typeface = Typeface.createFromAsset(assets, "carbon bl.ttf")
         binding.tvAppName.typeface = typeface
+
+
+        /**
+         * Here we will launch the Intro Screen after the splash screen using the handler.
+         * As using handler the splash screen will disappear after what we give to the handler.
+         */
+        // Adding the handler to after the a task after some delay.
+        Handler().postDelayed(
+            {
+
+                // Start the Intro Activity
+                startActivity(Intent(this@SplashActivity, IntroActivity::class.java))
+
+                // Call this when your activity is done and should be closed.
+                finish()
+
+            },
+            2500
+        ) // Here we pass the delay time in milliSeconds after which the splash activity will disappear.
 
     }
 }
