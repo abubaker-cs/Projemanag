@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
@@ -49,8 +50,15 @@ class SplashActivity : AppCompatActivity() {
          * Here we will launch the Intro Screen after the splash screen using the handler.
          * As using handler the splash screen will disappear after what we give to the handler.
          */
+
+        // IMPORTANT!!! What do I use now that Handler() is deprecated?
+        // ============================================================
+        // Only the parameterless constructor is deprecated, it is now preferred that you specify
+        // the Looper in the constructor via the Looper.getMainLooper() method.
+        // https://newbedev.com/what-do-i-use-now-that-handler-is-deprecated
+
         // Adding the handler to after the a task after some delay.
-        Handler().postDelayed(
+        Handler(Looper.getMainLooper()).postDelayed(
             {
 
                 // Start the Intro Activity
