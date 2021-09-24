@@ -14,17 +14,11 @@
         <!-- Customize your theme here. -->
     </style>
 
+
     <!-- Add this no actionBar style which we will be using in the manifest file for applying
     the theme to activity tag. This style tags are added automatically when you create a
     Basic Activity instead of Empty Activity.)-->
-    <style name="Theme.Projemanag.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!-- A custom theme is for No ActionBar to our activity is added. This is created over here for
         Maintaining the Status Bar color in all the activities added with NoActionBar Theme.
@@ -36,16 +30,15 @@
         Reference: https://www.udemy.com/course/android-kotlin-developer/learn/lecture/18000303#questions/12215974
 
         -->
-    <style name="CustomNoActionBarTheme" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
-        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+
+    <style name="NoActionBar" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <!-- A custom theme is added to our toolbar. For updating the Home Button and title Color as per theme. -->
-    <style name="CustomToolbarStyle">
-        <item name="android:textColorPrimary">#FFFFFF</item>
-        <item name="android:colorControlNormal">#FFFFFF</item>
-    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
