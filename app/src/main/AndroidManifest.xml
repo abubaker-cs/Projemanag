@@ -21,19 +21,22 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Intro -->
+        </activity> <!-- Intro -->
         <activity
             android:name=".IntroActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
-
-        <!-- Main -->
+            android:theme="@style/NoActionBar" /> <!-- Main -->
         <activity
             android:name=".MainActivity"
             android:exported="true" />
+
+        <!-- Sign Up -->
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar" />
     </application>
 
 </manifest>
