@@ -93,7 +93,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <!-- Button: Sign in -->
-                    <Button
+                    <android.widget.Button
                         android:id="@+id/btn_sign_in"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
