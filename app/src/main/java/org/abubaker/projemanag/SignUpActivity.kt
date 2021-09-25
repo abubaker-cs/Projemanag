@@ -53,7 +53,7 @@ class SignUpActivity : AppCompatActivity() {
             actionbar.setHomeAsUpIndicator(R.drawable.ic_black_color_back_24dp)
         }
 
-        //
+        // This will enable BACK Arrow (button) to return back to the previous screen
         binding.toolbarSignUpActivity.setNavigationOnClickListener {
             onBackPressed()
         }
