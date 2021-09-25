@@ -24,7 +24,8 @@ class SignUpActivity : AppCompatActivity() {
         // Inflate Layout (XML)
         binding = DataBindingUtil.setContentView(this@SignUpActivity, R.layout.activity_sign_up)
 
-        // This is used to hide the status bar and make the splash screen as a full screen activity.
+        // SDK 30 > This is used to hide the status bar and make the splash screen as a full screen activity.
+        // window.insetsController?.hide(WindowInsets.Type.statusBars())
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN

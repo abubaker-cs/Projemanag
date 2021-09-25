@@ -1,5 +1,6 @@
 package org.abubaker.projemanag
 
+import android.content.Intent
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -38,6 +39,15 @@ class IntroActivity : AppCompatActivity() {
         // Carbon Font Family: https://www.1001fonts.com/carbon-font.html
         val typeface: Typeface = Typeface.createFromAsset(assets, "carbon bl.ttf")
         binding.tvAppNameIntro.typeface = typeface
+
+
+        // Add a click event for Sign Up btn and launch the Sign Up Screen.
+        binding.btnSignUpIntro.setOnClickListener {
+
+            // Launch the sign up screen.
+            startActivity(Intent(this@IntroActivity, SignUpActivity::class.java))
+
+        }
 
     }
 }
