@@ -1,9 +1,10 @@
-package org.abubaker.projemanag
+package org.abubaker.projemanag.activities
 
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import org.abubaker.projemanag.R
 import org.abubaker.projemanag.databinding.ActivitySignInBinding
 
 class SignInActivity : AppCompatActivity() {

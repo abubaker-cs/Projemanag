@@ -1,12 +1,11 @@
-package org.abubaker.projemanag
+package org.abubaker.projemanag.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
-import org.abubaker.projemanag.databinding.ActivityIntroBinding
+import org.abubaker.projemanag.R
 import org.abubaker.projemanag.databinding.ActivitySignUpBinding
-import org.abubaker.projemanag.databinding.ActivitySplashBinding
 
 class SignUpActivity : AppCompatActivity() {
 

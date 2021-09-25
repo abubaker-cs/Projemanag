@@ -1,4 +1,4 @@
-package org.abubaker.projemanag
+package org.abubaker.projemanag.activities
 
 import android.content.Intent
 import android.graphics.Typeface
@@ -6,10 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
-import org.abubaker.projemanag.databinding.ActivityMainBinding
+import org.abubaker.projemanag.R
 import org.abubaker.projemanag.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
