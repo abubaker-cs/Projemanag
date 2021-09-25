@@ -2,6 +2,7 @@ package org.abubaker.projemanag
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import org.abubaker.projemanag.databinding.ActivityIntroBinding
 import org.abubaker.projemanag.databinding.ActivitySignUpBinding
@@ -12,11 +13,32 @@ class SignUpActivity : AppCompatActivity() {
     // Binding Object
     private lateinit var binding: ActivitySignUpBinding
 
+    /**
+     * This function is auto created by Android when the Activity Class is created.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        //This call the parent constructor
         super.onCreate(savedInstanceState)
 
         // Inflate Layout (XML)
         binding = DataBindingUtil.setContentView(this@SignUpActivity, R.layout.activity_sign_up)
+
+        // This is used to hide the status bar and make the splash screen as a full screen activity.
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
+
+        // Actionbar
+        setupActionBar()
+
+    }
+
+    /**
+     * A function for actionBar Setup.
+     */
+    private fun setupActionBar() {
 
         // Enabling Support for the Toolbar
         setSupportActionBar(binding.toolbarSignUpActivity)
@@ -24,19 +46,16 @@ class SignUpActivity : AppCompatActivity() {
         // Activating the Toolbar
         val actionbar = supportActionBar
 
-        //
+        // If Actionbar is available then:
         if (actionbar != null) {
-            actionbar!!.setDisplayHomeAsUpEnabled(true)
-            // actionbar!!.title = happyPlaceDetailModel.title
+            actionbar.setDisplayHomeAsUpEnabled(true)
+            actionbar.setHomeAsUpIndicator(R.drawable.ic_black_color_back_24dp)
         }
 
-    }
-
-    private fun setupActionBar() {
-
-
-
-
+        //
+        binding.toolbarSignUpActivity.setNavigationOnClickListener {
+            onBackPressed()
+        }
 
     }
 
