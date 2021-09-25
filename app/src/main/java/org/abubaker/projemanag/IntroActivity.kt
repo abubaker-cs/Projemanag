@@ -31,7 +31,6 @@ class IntroActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
-
         /**
          * Custom Font
          */
@@ -41,7 +40,10 @@ class IntroActivity : AppCompatActivity() {
         binding.tvAppNameIntro.typeface = typeface
 
 
-        // Add a click event for Sign Up btn and launch the Sign Up Screen.
+        /**
+         * Launch the Sign up Activity
+         */
+        // Add a click event for Sign Up button and launch the Sign Up Screen.
         binding.btnSignUpIntro.setOnClickListener {
 
             // Launch the sign up screen.
