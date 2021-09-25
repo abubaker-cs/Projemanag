@@ -41,13 +41,24 @@ class IntroActivity : AppCompatActivity() {
 
 
         /**
-         * Launch the Sign up Activity
+         * Launch: Sign Up
          */
         // Add a click event for Sign Up button and launch the Sign Up Screen.
         binding.btnSignUpIntro.setOnClickListener {
 
             // Launch the sign up screen.
             startActivity(Intent(this@IntroActivity, SignUpActivity::class.java))
+
+        }
+
+        /**
+         * Launch: Sign In
+         */
+        // Add a click event for Sign In button and launch the Sign Up Screen.
+        binding.btnSignInIntro.setOnClickListener {
+
+            // Launch the sign up screen.
+            startActivity(Intent(this@IntroActivity, SignInActivity::class.java))
 
         }
 

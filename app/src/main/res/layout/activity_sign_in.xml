@@ -10,6 +10,7 @@
         android:orientation="vertical"
         tools:context=".SignInActivity">
 
+        <!-- Toolbar -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_sign_in_activity"
             android:layout_width="match_parent"
@@ -34,6 +35,7 @@
             android:layout_marginTop="@dimen/authentication_screen_content_marginTop"
             android:orientation="vertical">
 
+            <!-- Description -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
