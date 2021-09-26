@@ -94,13 +94,13 @@ class SignUpActivity : BaseActivity() {
             // Store data in Firestore
             FirebaseAuth
 
-                // Get Ready
+                // 01 Get Ready
                 .getInstance()
 
-                // We will be using Email + Password to create a new user account
+                // 02 We will be using Email + Password to create a new user account
                 .createUserWithEmailAndPassword(email, password)
 
-                // Execute Task
+                // 03 Execute Task
                 .addOnCompleteListener(OnCompleteListener<AuthResult> { task ->
 
                     // Hide the progress dialog
