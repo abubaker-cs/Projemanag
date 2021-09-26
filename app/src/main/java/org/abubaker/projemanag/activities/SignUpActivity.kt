@@ -2,12 +2,14 @@ package org.abubaker.projemanag.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import org.abubaker.projemanag.R
 import org.abubaker.projemanag.databinding.ActivitySignUpBinding
 
-class SignUpActivity : AppCompatActivity() {
+class SignUpActivity : BaseActivity() {
 
     // Binding Object
     private lateinit var binding: ActivitySignUpBinding
@@ -57,6 +59,48 @@ class SignUpActivity : AppCompatActivity() {
             onBackPressed()
         }
 
+    }
+
+    /**
+     * A function to register a user to our app using the Firebase.
+     * For more details visit: https://firebase.google.com/docs/auth/android/custom-auth
+     */
+    private fun registerUser(){
+        val name: String = binding.etName.text.toString().trim { it <= ' ' }
+        val email: String = binding.etEmail.text.toString().trim { it <= ' ' }
+        val password: String = binding.etPassword.text.toString().trim { it <= ' ' }
+
+        if (validateForm(name, email, password)) {
+
+            Toast.makeText(
+                this@SignUpActivity,
+                "Now we can register a new user.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    /**
+     * A function to validate the entries of a new user.
+     */
+    private fun validateForm(name: String, email: String, password: String): Boolean {
+        return when {
+            TextUtils.isEmpty(name) -> {
+                showErrorSnackBar("Please enter name.")
+                false
+            }
+            TextUtils.isEmpty(email) -> {
+                showErrorSnackBar("Please enter email.")
+                false
+            }
+            TextUtils.isEmpty(password) -> {
+                showErrorSnackBar("Please enter password.")
+                false
+            }
+            else -> {
+                true
+            }
+        }
     }
 
 }
