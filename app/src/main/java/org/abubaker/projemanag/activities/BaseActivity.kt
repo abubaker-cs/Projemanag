@@ -108,13 +108,13 @@ open class BaseActivity : AppCompatActivity() {
         val snackBar =
             Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
 
-        //
+        // We need the Snackbar View to set the individual background color in the next step
         val snackBarView = snackBar.view
 
         // Set background color
         snackBarView.setBackgroundColor(
 
-            //
+            // #F72400 (Red Color)
             ContextCompat.getColor(
                 this@BaseActivity,
                 R.color.snackbar_error_color
