@@ -4,6 +4,7 @@ import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -48,6 +49,9 @@ open class BaseActivity : AppCompatActivity() {
 
         // mProgressDialog.tv_progress_text.text = text
 
+        mProgressDialog.findViewById<TextView>(R.id.tv_progress_text).text = text
+
+
         //Start the dialog and display it on screen.
         mProgressDialog.show()
     }
@@ -59,10 +63,16 @@ open class BaseActivity : AppCompatActivity() {
         mProgressDialog.dismiss()
     }
 
+    /**
+     * getCurrentUserID
+     */
     fun getCurrentUserID(): String {
         return FirebaseAuth.getInstance().currentUser!!.uid
     }
 
+    /**
+     * doubleBackToExit
+     */
     fun doubleBackToExit() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed()
@@ -79,6 +89,9 @@ open class BaseActivity : AppCompatActivity() {
         Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
     }
 
+    /**
+     * showErrorSnackBar
+     */
     fun showErrorSnackBar(message: String) {
         val snackBar =
             Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
