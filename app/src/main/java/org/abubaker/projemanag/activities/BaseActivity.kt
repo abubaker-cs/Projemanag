@@ -1,18 +1,17 @@
 package org.abubaker.projemanag.activities
 
 import android.app.Dialog
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import org.abubaker.projemanag.R
-import org.abubaker.projemanag.databinding.ActivityIntroBinding
 import org.abubaker.projemanag.databinding.DialogProgressBinding
 
 /**
