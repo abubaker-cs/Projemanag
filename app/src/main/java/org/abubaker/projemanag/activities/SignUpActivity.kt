@@ -126,6 +126,8 @@ class SignUpActivity : BaseActivity() {
                          * Here the new user registered is automatically signed-in so we just sign-out the user from firebase
                          * and send him to Intro Screen for Sign-In
                          */
+                        // TODO: In the future we can perform other tasks, but now we need to sign-out
+                        //  the user after successful registration
                         FirebaseAuth.getInstance().signOut()
 
                         // Finish the Sign-Up Screen
