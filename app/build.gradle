@@ -50,17 +50,24 @@ dependencies {
     // Material Design
     implementation 'com.google.android.material:material:1.4.0'
 
+    // Import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:28.4.1')
+
+    // Add the dependency for the Firebase SDK for Google Analytics
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
     // Firebase Authentication Dependency
-    implementation "com.google.firebase:firebase-auth:21.0.1"
+    // implementation "com.google.firebase:firebase-auth:21.0.1"
 
     // Firebase Cloud Firestore Dependency
-    implementation 'com.google.firebase:firebase-firestore:23.0.3'
+    // implementation 'com.google.firebase:firebase-firestore:23.0.3'
 
     // Firebase Storage Dependency
-    implementation 'com.google.firebase:firebase-storage:20.0.0'
+    // implementation 'com.google.firebase:firebase-storage:20.0.0'
 
     // Firebase Messaging Dependency
-    implementation 'com.google.firebase:firebase-messaging:22.0.0'
+    // implementation 'com.google.firebase:firebase-messaging:22.0.0'
 
     // circular image view dependency
     implementation 'de.hdodenhof:circleimageview:3.1.0'
