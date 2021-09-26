@@ -4,6 +4,7 @@ import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -23,7 +24,7 @@ open class BaseActivity : AppCompatActivity() {
     // Binding Object
     private lateinit var binding: DialogProgressBinding
 
-
+    //  It will be used in the Double Click to Exit function:
     private var doubleBackToExitPressedOnce = false
 
     /**
@@ -64,21 +65,24 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     /**
-     * getCurrentUserID
+     * Firebase: Get Current User's ID
      */
     fun getCurrentUserID(): String {
         return FirebaseAuth.getInstance().currentUser!!.uid
     }
 
     /**
-     * doubleBackToExit
+     * Double Click to Exit
      */
     fun doubleBackToExit() {
+
+        // If it was clicked twice
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed()
             return
         }
 
+        // Alert: If it was clicked only once
         this.doubleBackToExitPressedOnce = true
         Toast.makeText(
             this,
@@ -86,7 +90,13 @@ open class BaseActivity : AppCompatActivity() {
             Toast.LENGTH_SHORT
         ).show()
 
-        Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
+        // Precaution: If the user did not pressed twice within 2 seconds then
+        Handler(Looper.getMainLooper()).postDelayed(
+            {
+                doubleBackToExitPressedOnce = false
+            },
+            2000
+        )
     }
 
     /**
