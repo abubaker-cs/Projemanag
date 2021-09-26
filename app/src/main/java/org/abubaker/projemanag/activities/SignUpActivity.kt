@@ -84,13 +84,23 @@ class SignUpActivity : BaseActivity() {
         // Send data for verification to check if any field is left Empty
         if (validateForm(name, email, password)) {
 
-            // Show the progress dialog.
-            showProgressDialog(resources.getString(R.string.please_wait))
+            // Show the progress dialog
+            showProgressDialog(
+                resources.getString(
+                    R.string.please_wait
+                )
+            )
 
-            //
+            // Store data in Firestore
             FirebaseAuth
+
+                // Get Ready
                 .getInstance()
+
+                // We will be using Email + Password to create a new user account
                 .createUserWithEmailAndPassword(email, password)
+
+                // Execute Task
                 .addOnCompleteListener(OnCompleteListener<AuthResult> { task ->
 
                     // Hide the progress dialog
@@ -105,6 +115,7 @@ class SignUpActivity : BaseActivity() {
                         // Registered Email
                         val registeredEmail = firebaseUser.email!!
 
+                        //
                         Toast.makeText(
                             this@SignUpActivity,
                             "$name you have successfully registered with email id $registeredEmail.",
@@ -115,21 +126,20 @@ class SignUpActivity : BaseActivity() {
                          * Here the new user registered is automatically signed-in so we just sign-out the user from firebase
                          * and send him to Intro Screen for Sign-In
                          */
-
-                        /**
-                         * Here the new user registered is automatically signed-in so we just sign-out the user from firebase
-                         * and send him to Intro Screen for Sign-In
-                         */
                         FirebaseAuth.getInstance().signOut()
 
                         // Finish the Sign-Up Screen
                         finish()
+
                     } else {
+
+                        // Display Error Message
                         Toast.makeText(
                             this@SignUpActivity,
                             task.exception!!.message,
                             Toast.LENGTH_SHORT
                         ).show()
+
                     }
                 })
         }
