@@ -129,7 +129,7 @@ open class BaseActivity : AppCompatActivity() {
 
         )
 
-        // Display snackbar
+        // Display Snackbar
         snackBar.show()
     }
 
