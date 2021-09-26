@@ -100,18 +100,29 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     /**
-     * showErrorSnackBar
+     * Global Function: If there is any error, then display RELATED message
      */
     fun showErrorSnackBar(message: String) {
+
+        // Generic Template
         val snackBar =
             Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
+
+        //
         val snackBarView = snackBar.view
+
+        // Set background color
         snackBarView.setBackgroundColor(
+
+            //
             ContextCompat.getColor(
                 this@BaseActivity,
                 R.color.snackbar_error_color
             )
+
         )
+
+        // Display snackbar
         snackBar.show()
     }
 
