@@ -15,6 +15,8 @@ class IntroActivity : BaseActivity() {
     private lateinit var binding: ActivityIntroBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        //This call the parent constructor
         super.onCreate(savedInstanceState)
 
         // Inflate Layout (XML)

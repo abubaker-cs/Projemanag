@@ -32,8 +32,15 @@ open class BaseActivity : AppCompatActivity() {
      */
     private lateinit var mProgressDialog: Dialog
 
+
+    /**
+     * onCreate()
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        //This call the parent constructor
         super.onCreate(savedInstanceState)
+
         // Inflate Layout (XML)
         binding = DataBindingUtil.setContentView(this@BaseActivity, R.layout.dialog_progress)
     }

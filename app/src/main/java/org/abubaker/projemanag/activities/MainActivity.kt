@@ -12,13 +12,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        //This call the parent constructor
         super.onCreate(savedInstanceState)
-        // setContentView(R.layout.activity_main)
 
         // Inflate Layout (XML)
         binding = DataBindingUtil.setContentView(this@MainActivity, R.layout.activity_main)
-
-
 
     }
 }
