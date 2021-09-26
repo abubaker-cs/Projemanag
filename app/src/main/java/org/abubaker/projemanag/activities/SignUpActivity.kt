@@ -59,6 +59,11 @@ class SignUpActivity : BaseActivity() {
             onBackPressed()
         }
 
+        // Click event for sign-up button.
+        binding.btnSignUp.setOnClickListener {
+            registerUser()
+        }
+
     }
 
     /**
@@ -76,6 +81,7 @@ class SignUpActivity : BaseActivity() {
         if (validateForm(name, email, password)) {
 
             // Display Message
+            // TODO: Actual registration in Firebase will occur here
             Toast.makeText(
                 this@SignUpActivity,
                 "Now we can register a new user.",
