@@ -65,38 +65,54 @@ class SignUpActivity : BaseActivity() {
      * A function to register a user to our app using the Firebase.
      * For more details visit: https://firebase.google.com/docs/auth/android/custom-auth
      */
-    private fun registerUser(){
+    private fun registerUser() {
+
+        // "Trim Extra Spaces" and Store text in the variables: Name, Email and Password
         val name: String = binding.etName.text.toString().trim { it <= ' ' }
         val email: String = binding.etEmail.text.toString().trim { it <= ' ' }
         val password: String = binding.etPassword.text.toString().trim { it <= ' ' }
 
+        // Send data for verification to check if any field is left Empty
         if (validateForm(name, email, password)) {
 
+            // Display Message
             Toast.makeText(
                 this@SignUpActivity,
                 "Now we can register a new user.",
                 Toast.LENGTH_SHORT
             ).show()
+
         }
+
     }
 
     /**
      * A function to validate the entries of a new user.
      */
     private fun validateForm(name: String, email: String, password: String): Boolean {
+
+        // Loop: It will be used to check if any field is Empty
         return when {
+
+            // Name
             TextUtils.isEmpty(name) -> {
                 showErrorSnackBar("Please enter name.")
                 false
             }
+
+            // Email
             TextUtils.isEmpty(email) -> {
                 showErrorSnackBar("Please enter email.")
                 false
             }
+
+            // Password
             TextUtils.isEmpty(password) -> {
                 showErrorSnackBar("Please enter password.")
                 false
             }
+
+            // Default
             else -> {
                 true
             }
