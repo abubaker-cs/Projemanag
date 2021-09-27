@@ -98,14 +98,14 @@ class SignInActivity : BaseActivity() {
                     // If task was successful
                     if (task.isSuccessful) {
 
-                        // Display Success Message
+                        // 1. Display Success Message
                         Toast.makeText(
                             this@SignInActivity,
                             "You have successfully signed in.",
                             Toast.LENGTH_LONG
                         ).show()
 
-                        // Open: MainActivity.kt
+                        // 2. Open: MainActivity.kt
                         startActivity(
                             Intent(this@SignInActivity, MainActivity::class.java)
                         )
