@@ -40,6 +40,11 @@ class SignInActivity : BaseActivity() {
 
         // Actionbar
         setupActionBar()
+
+        // Click event for sign-in button and call the function to sign in.
+        binding.btnSignIn.setOnClickListener {
+            signInRegisteredUser()
+        }
     }
 
     /**
@@ -70,10 +75,12 @@ class SignInActivity : BaseActivity() {
      * A function for Sign-In using the registered user using the email and password.
      */
     private fun signInRegisteredUser() {
+
         // Here we get the text from editText and trim the space
         val email: String = binding.etEmail.text.toString().trim { it <= ' ' }
         val password: String = binding.etPassword.text.toString().trim { it <= ' ' }
 
+        //
         if (validateForm(email, password)) {
             // Show the progress dialog.
             showProgressDialog(resources.getString(R.string.please_wait))
@@ -81,23 +88,33 @@ class SignInActivity : BaseActivity() {
             // Sign-In using FirebaseAuth
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
+
+                    //
                     hideProgressDialog()
+
+                    //
                     if (task.isSuccessful) {
 
+                        //
                         Toast.makeText(
                             this@SignInActivity,
                             "You have successfully signed in.",
                             Toast.LENGTH_LONG
                         ).show()
 
+                        //
                         startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+
                     } else {
+
+                        //
                         Toast.makeText(
                             this@SignInActivity,
                             task.exception!!.message,
                             Toast.LENGTH_LONG
                         ).show()
                     }
+
                 }
         }
     }
