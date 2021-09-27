@@ -92,25 +92,27 @@ class SignInActivity : BaseActivity() {
                 .signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
 
-                    //
+                    // Hide the progress dialog
                     hideProgressDialog()
 
-                    //
+                    // If task was successful
                     if (task.isSuccessful) {
 
-                        //
+                        // Display Success Message
                         Toast.makeText(
                             this@SignInActivity,
                             "You have successfully signed in.",
                             Toast.LENGTH_LONG
                         ).show()
 
-                        //
-                        startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+                        // Open: MainActivity.kt
+                        startActivity(
+                            Intent(this@SignInActivity, MainActivity::class.java)
+                        )
 
                     } else {
 
-                        //
+                        // Display failure message
                         Toast.makeText(
                             this@SignInActivity,
                             task.exception!!.message,
