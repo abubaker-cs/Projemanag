@@ -80,13 +80,16 @@ class SignInActivity : BaseActivity() {
         val email: String = binding.etEmail.text.toString().trim { it <= ' ' }
         val password: String = binding.etPassword.text.toString().trim { it <= ' ' }
 
-        //
+        // After validating fields:
         if (validateForm(email, password)) {
+
             // Show the progress dialog.
             showProgressDialog(resources.getString(R.string.please_wait))
 
             // Sign-In using FirebaseAuth
-            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+            FirebaseAuth
+                .getInstance()
+                .signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
 
                     //
@@ -123,6 +126,7 @@ class SignInActivity : BaseActivity() {
      * A function to validate the entries of a user.
      */
     private fun validateForm(email: String, password: String): Boolean {
+
         return if (TextUtils.isEmpty(email)) {
             showErrorSnackBar("Please enter email.")
             false
@@ -132,6 +136,7 @@ class SignInActivity : BaseActivity() {
         } else {
             true
         }
+
     }
 
 }
