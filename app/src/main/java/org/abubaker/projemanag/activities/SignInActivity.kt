@@ -143,19 +143,19 @@ class SignInActivity : BaseActivity() {
     }
 
     /**
-     * A function to get the user details from the firestore database after authentication.
+     * A function to get the user details from the Firestore database after authentication.
      */
     fun signInSuccess(user: User) {
 
         // Hide the Progress Dialog
         hideProgressDialog()
 
-        // Transfer user from the SignIn screen to the MainActivity
+        // Transfer user from the SignIn Screen to the MainActivity
         startActivity(
             Intent(this@SignInActivity, MainActivity::class.java)
         )
 
-        //
+        // We need it, so the user cannot get back to the SignIn Screen
         finish()
     }
 
