@@ -147,10 +147,10 @@ class SignInActivity : BaseActivity() {
      */
     fun signInSuccess(user: User) {
 
-        //
+        // Hide the Progress Dialog
         hideProgressDialog()
 
-        //
+        // Transfer user from the SignIn screen to the MainActivity
         startActivity(
             Intent(this@SignInActivity, MainActivity::class.java)
         )

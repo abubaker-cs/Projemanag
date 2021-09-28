@@ -71,28 +71,38 @@ class FirestoreClass {
     }
 
     /**
-     * A function to SignIn using firebase and get the user details from Firestore Database.
+     * A function to SignIn using firebase and GET the user details from Firestore Database.
      */
     fun signInUser(activity: SignInActivity) {
 
         // Here we pass the collection name from which we wants the data.
         mFireStore.collection(Constants.USERS)
+
             // The document id to get the Fields of user.
             .document(getCurrentUserID())
+
+            // In registerUser() we are using .set() to write  values, but here we need to get data
             .get()
+
+            // Success Action
             .addOnSuccessListener { document ->
 
+                // Print Log Message
                 Log.e(
                     activity.javaClass.simpleName, document.toString()
                 )
 
+                // Since our .document() has all the user details, we can get additional information form it below:
                 // Here we have received the document snapshot which is converted into the User Data model object.
                 val loggedInUser = document.toObject(User::class.java)!!
 
                 // Here call a function of base activity for transferring the result to it.
+                // Note: signInSuccess() function is defined in the activities/SignUpActivity.kt file
                 activity.signInSuccess(loggedInUser)
 
             }
+
+            // Failure Action
             .addOnFailureListener { e ->
                 Log.e(
                     activity.javaClass.simpleName,
