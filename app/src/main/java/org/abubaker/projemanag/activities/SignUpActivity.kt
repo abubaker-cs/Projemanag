@@ -1,6 +1,5 @@
 package org.abubaker.projemanag.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.WindowManager
@@ -12,6 +11,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import org.abubaker.projemanag.R
 import org.abubaker.projemanag.databinding.ActivitySignUpBinding
+import org.abubaker.projemanag.firebase.FirestoreClass
+import org.abubaker.projemanag.models.User
 
 class SignUpActivity : BaseActivity() {
 
@@ -103,9 +104,6 @@ class SignUpActivity : BaseActivity() {
                 // 03 Execute Task
                 .addOnCompleteListener(OnCompleteListener<AuthResult> { task ->
 
-                    // Hide the progress dialog
-                    hideProgressDialog()
-
                     // If the registration is successfully done
                     if (task.isSuccessful) {
 
@@ -115,20 +113,8 @@ class SignUpActivity : BaseActivity() {
                         // Registered Email
                         val registeredEmail = firebaseUser.email!!
 
-                        //
-                        Toast.makeText(
-                            this@SignUpActivity,
-                            "$name you have successfully registered with email id $registeredEmail.",
-                            Toast.LENGTH_SHORT
-                        ).show()
-
-                        /**
-                         * Here the new user registered is automatically signed-in so we just sign-out the user from firebase
-                         * and send him to Intro Screen for Sign-In
-                         */
-                        // TODO: In the future we can perform other tasks, but now we need to sign-out
-                        //  the user after successful registration
-                        FirebaseAuth.getInstance().signOut()
+                        val user = User(firebaseUser.uid, name, registeredEmail)
+                        FirestoreClass().registerUser(this, user)
 
                         // Finish the Sign-Up Screen
                         finish()
@@ -200,6 +186,7 @@ class SignUpActivity : BaseActivity() {
          * and send him to Intro Screen for Sign-In
          */
         FirebaseAuth.getInstance().signOut()
+
         // Finish the Sign-Up Screen
         finish()
     }

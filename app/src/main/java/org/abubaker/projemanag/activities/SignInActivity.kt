@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.FirebaseAuth
 import org.abubaker.projemanag.R
 import org.abubaker.projemanag.databinding.ActivitySignInBinding
+import org.abubaker.projemanag.models.User
 
 class SignInActivity : BaseActivity() {
 
@@ -139,6 +140,23 @@ class SignInActivity : BaseActivity() {
             true
         }
 
+    }
+
+    /**
+     * A function to get the user details from the firestore database after authentication.
+     */
+    fun signInSuccess(user: User) {
+
+        //
+        hideProgressDialog()
+
+        //
+        startActivity(
+            Intent(this@SignInActivity, MainActivity::class.java)
+        )
+
+        //
+        finish()
     }
 
 }
