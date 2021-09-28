@@ -42,14 +42,22 @@ class FirestoreClass {
             .document(getCurrentUserID())
 
             // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
+            // userInfo = Set of fields defined in the models/User.kt:
+            // 1. id
+            // 2. name
+            // 3. email, etc
             .set(userInfo, SetOptions.merge())
 
+            // Success Action
             .addOnSuccessListener {
 
-                // Here call a function of base activity for transferring the result to it.
+                // This function inside the SignUpActivity will inform, that the user was registered
+                // successfully and an entry is made in the Firestore database.
                 activity.userRegisteredSuccess()
 
             }
+
+            // Failure Action
             .addOnFailureListener { e ->
 
                 Log.e(
