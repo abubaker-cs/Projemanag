@@ -117,13 +117,23 @@ class FirestoreClass {
      */
     fun getCurrentUserID(): String {
 
+        // An Instance of currentUser using FirebaseAuth
+        val currentUser = FirebaseAuth.getInstance().currentUser
+
+        // A variable to assign the currentUserId if it is not null or else it will be blank.
+        var currentUserID = ""
+
+        // If the user exists
+        if (currentUser != null) {
+            currentUserID = currentUser.uid
+        }
+
+        return currentUserID
+
         // It will return current user's UID
         // UID is actually defined in the "Authentication" page for individual users, i.e.:
         // user xyz@yahoo.com has a UID of HVTXS5nsTyYH6cj1GzRNlIrpLgR5
-        return FirebaseAuth
-            .getInstance()
-            .currentUser!!
-            .uid
+        // return FirebaseAuth.getInstance().currentUser!!.uid
     }
 
 }
