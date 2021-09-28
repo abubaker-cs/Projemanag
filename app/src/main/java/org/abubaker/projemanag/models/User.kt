@@ -4,12 +4,25 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class User(
+
+    // ID of the user
     val id: String = "",
+
+    // Username
     val name: String = "",
+
+    // Email
     val email: String = "",
+
+    // Profile Picture
     val image: String = "",
+
+    // Mobile Number
     val mobile: Long = 0,
+
+    // Token
     val fcmToken: String = ""
+
 ) : Parcelable {
     constructor(source: Parcel) : this(
         source.readString()!!,
