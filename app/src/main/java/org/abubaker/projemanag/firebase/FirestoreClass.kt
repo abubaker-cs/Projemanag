@@ -13,14 +13,20 @@ import org.abubaker.projemanag.utils.Constants
  */
 class FirestoreClass {
 
-    // Create a instance of Firebase Firestore
+    // 01 Create a instance of Firebase Firestore
     private val mFireStore = FirebaseFirestore.getInstance()
 
     /**
-     * A function to make an entry of the registered user in the firestore database.
+     * Register details in the Firestore database
+     * i.e at https://console.firebase.google.com/project/projemanag-3ef69/firestore/data/~2F
      */
+
+    // We are passing:
+    // 1 - activities/SignUpActivity.kt (data will be transferred through it)
+    // 2 - models/User.kt (userInfo will be based on it)
     fun registerUser(activity: SignUpActivity, userInfo: User) {
 
+        //
         mFireStore.collection(Constants.USERS)
 
             // Document ID for users fields. Here the document it is the User ID.
@@ -50,6 +56,12 @@ class FirestoreClass {
      * A function for getting the user id of current logged user.
      */
     fun getCurrentUserID(): String {
-        return FirebaseAuth.getInstance().currentUser!!.uid
+
+        //
+        return FirebaseAuth
+            .getInstance()
+            .currentUser!!
+            .uid
     }
+
 }
