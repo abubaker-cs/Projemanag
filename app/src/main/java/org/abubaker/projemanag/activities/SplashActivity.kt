@@ -68,9 +68,10 @@ class SplashActivity : AppCompatActivity() {
                 val currentUserID = FirestoreClass().getCurrentUserID()
 
 
+                // If the userID will not be EMPTY, then it means that a user is already loggedIn
                 if (currentUserID.isNotEmpty()) {
 
-                    // Start the Main Activity
+                    // Start the Main Activity for the already loggedIn user
                     startActivity(
                         Intent(
                             this@SplashActivity,
@@ -80,7 +81,7 @@ class SplashActivity : AppCompatActivity() {
 
                 } else {
 
-                    // Start the Intro Activity
+                    // Start the Intro Activity for new/signedOut user
                     startActivity(
                         Intent(
                             this@SplashActivity,
