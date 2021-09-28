@@ -1,7 +1,7 @@
 package org.abubaker.projemanag.utils
 
 /**
- * a constants object and make an users collection constant value
+ * It will define USERS collection constant value
  */
 object Constants {
 

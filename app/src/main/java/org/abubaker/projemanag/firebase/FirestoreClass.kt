@@ -26,7 +26,7 @@ class FirestoreClass {
     // 2 - models/User.kt (userInfo will be based on it)
     fun registerUser(activity: SignUpActivity, userInfo: User) {
 
-        //
+        // We are importing USERS variable from utils/Constants.kt file
         mFireStore.collection(Constants.USERS)
 
             // Document ID for users fields. Here the document it is the User ID.

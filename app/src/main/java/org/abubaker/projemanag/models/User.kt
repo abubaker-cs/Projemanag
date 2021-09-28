@@ -14,7 +14,7 @@ data class User(
     // Email
     val email: String = "",
 
-    // Profile Picture
+    // Profile Picture (path)
     val image: String = "",
 
     // Mobile Number
@@ -35,6 +35,7 @@ data class User(
 
     override fun describeContents() = 0
 
+    // Write values using variables defined in the "data class User" above
     override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
         writeString(id)
         writeString(name)
