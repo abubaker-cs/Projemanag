@@ -26,10 +26,19 @@ class FirestoreClass {
     // 2 - models/User.kt (userInfo will be based on it)
     fun registerUser(activity: SignUpActivity, userInfo: User) {
 
-        // We are importing USERS variable from utils/Constants.kt file
+        /**
+         * What is a Collection in Firestore?
+         * It is a SET of documents that contain documents, i.e. USERS will store unique data for
+         * each user. ]
+         *
+         * We are importing USERS variable from utils/Constants.kt file
+         * It is like we clicked on the "Start Collection" in:
+         * https://console.firebase.google.com/project/projemanag-3ef69/firestore
+         */
         mFireStore.collection(Constants.USERS)
 
             // Document ID for users fields. Here the document it is the User ID.
+            // We have defined getCurrentUserID() below this class
             .document(getCurrentUserID())
 
             // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
@@ -57,7 +66,9 @@ class FirestoreClass {
      */
     fun getCurrentUserID(): String {
 
-        //
+        // It will return current user's UID
+        // UID is actually defined in the "Authentication" page for individual users, i.e.:
+        // user xyz@yahoo.com has a UID of HVTXS5nsTyYH6cj1GzRNlIrpLgR5
         return FirebaseAuth
             .getInstance()
             .currentUser!!
