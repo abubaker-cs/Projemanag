@@ -20,7 +20,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <!-- Thumbnail + Side Menu -->
+        <!--
+            NavigationView will contain:
+                1. Thumbnail (nav_header_main.xml)
+                2. Side Menu items (activity_main_drawer.xml)
+         -->
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
             android:layout_width="wrap_content"
