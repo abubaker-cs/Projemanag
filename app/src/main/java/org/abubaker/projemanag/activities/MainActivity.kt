@@ -28,6 +28,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // Setup ActionBar
         setupActionBar()
 
+        // Assign the NavigationView.OnNavigationItemSelectedListener to navigation view.
+        binding.navView.setNavigationItemSelectedListener(this)
+
 
     }
 
@@ -93,6 +96,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             R.id.nav_my_profile -> {
 
                 Toast.makeText(this@MainActivity, "My Profile", Toast.LENGTH_SHORT).show()
+
             }
 
             // Sign Out
@@ -103,8 +107,14 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
                 // Send the user to the intro screen of the application.
                 val intent = Intent(this, IntroActivity::class.java)
+
+                // Flags:
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+
+                //
                 startActivity(intent)
+
+
                 finish()
             }
 
