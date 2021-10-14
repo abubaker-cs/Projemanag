@@ -31,11 +31,6 @@ class MainActivity : AppCompatActivity() {
      */
     private fun setupActionBar() {
 
-        // setSupportActionBar(toolbar_main_activity)
-
-        // toolbar_main_activity.setNavigationIcon(R.drawable.ic_action_navigation_menu)
-
-
         // Enabling Support for the Toolbar
         setSupportActionBar(binding.mainAppBarLayout.appBarMainTb)
         binding.mainAppBarLayout.appBarMainTb.setNavigationIcon(R.drawable.ic_black_color_back_24dp)
@@ -44,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         binding.mainAppBarLayout.appBarMainTb.setNavigationOnClickListener {
             toggleDrawer()
         }
+        
     }
 
     /**
