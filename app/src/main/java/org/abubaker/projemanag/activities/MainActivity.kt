@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import org.abubaker.projemanag.R
 import org.abubaker.projemanag.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     // Binding Object
     private lateinit var binding: ActivityMainBinding
@@ -62,5 +62,20 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-    // END
+
+    // Add a onBackPressed function and check if the navigation drawer is open or closed.
+    override fun onBackPressed() {
+
+        // If the Drawer is Open
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+
+            // We will close the drawable, since it was already opened
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+
+        } else {
+
+            // A double back press function is added in Base Activity.
+            doubleBackToExit()
+        }
+    }
 }
