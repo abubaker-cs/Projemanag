@@ -108,10 +108,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 // Send the user to the intro screen of the application.
                 val intent = Intent(this, IntroActivity::class.java)
 
-                // Flags:
+                // Flags: Reset the priority
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
 
-                //
+                // Initialize
                 startActivity(intent)
 
 
