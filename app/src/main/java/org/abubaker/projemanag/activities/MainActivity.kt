@@ -33,13 +33,15 @@ class MainActivity : AppCompatActivity() {
 
         // Enabling Support for the Toolbar
         setSupportActionBar(binding.mainAppBarLayout.appBarMainTb)
-        binding.mainAppBarLayout.appBarMainTb.setNavigationIcon(R.drawable.ic_black_color_back_24dp)
+
+        // Icon
+        binding.mainAppBarLayout.appBarMainTb.setNavigationIcon(R.drawable.ic_action_navigation_menu)
 
         // Click event for navigation in the action bar and call the toggleDrawer function
         binding.mainAppBarLayout.appBarMainTb.setNavigationOnClickListener {
             toggleDrawer()
         }
-        
+
     }
 
     /**
@@ -48,10 +50,16 @@ class MainActivity : AppCompatActivity() {
     private fun toggleDrawer() {
 
         if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+
+            // State: Close
             binding.drawerLayout.closeDrawer(GravityCompat.START)
+
         } else {
+
+            // State: Open
             binding.drawerLayout.openDrawer(GravityCompat.START)
         }
+
     }
     // END
 }
