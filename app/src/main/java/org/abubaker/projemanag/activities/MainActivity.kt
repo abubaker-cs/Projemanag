@@ -49,14 +49,15 @@ class MainActivity : AppCompatActivity() {
      */
     private fun toggleDrawer() {
 
+        // If the Drawer is Open
         if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
 
-            // State: Close
+            // We will close the drawable, since it was already opened
             binding.drawerLayout.closeDrawer(GravityCompat.START)
 
         } else {
 
-            // State: Open
+            // Since, the Drawer was closed so now we will open it
             binding.drawerLayout.openDrawer(GravityCompat.START)
         }
 
