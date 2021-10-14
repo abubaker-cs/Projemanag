@@ -2,6 +2,7 @@ package org.abubaker.projemanag.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import org.abubaker.projemanag.R
 import org.abubaker.projemanag.databinding.ActivityMainBinding
@@ -36,21 +37,13 @@ class MainActivity : AppCompatActivity() {
 
 
         // Enabling Support for the Toolbar
-        setSupportActionBar(binding.toolbarMainActivity)
-
-        // Activating the Toolbar
-        val actionbar = supportActionBar
-
-        //
-        if (actionbar != null) {
-            // actionbar!!.setDisplayHomeAsUpEnabled(true)
-            // actionbar!!.title = happyPlaceDetailModel.title
-        }
+        setSupportActionBar(binding.mainAppBarLayout.appBarMainTb)
+        binding.mainAppBarLayout.appBarMainTb.setNavigationIcon(R.drawable.ic_black_color_back_24dp)
 
         // Click event for navigation in the action bar and call the toggleDrawer function
-        // toolbar_main_activity.setNavigationOnClickListener {
-        //     toggleDrawer()
-        // }
+        binding.mainAppBarLayout.appBarMainTb.setNavigationOnClickListener {
+            toggleDrawer()
+        }
     }
 
     /**
@@ -58,11 +51,11 @@ class MainActivity : AppCompatActivity() {
      */
     private fun toggleDrawer() {
 
-//        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-//            drawer_layout.closeDrawer(GravityCompat.START)
-//        } else {
-//            drawer_layout.openDrawer(GravityCompat.START)
-//        }
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            binding.drawerLayout.openDrawer(GravityCompat.START)
+        }
     }
     // END
 }
