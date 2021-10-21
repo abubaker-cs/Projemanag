@@ -136,6 +136,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     // val image: String = "",
     fun updateNavigationUserDetails(user: User) {
 
+        // Based on solution provided by Helder
+        // URL: https://www.udemy.com/course/android-kotlin-developer/learn/lecture/18301726#questions/14389880
         val headerView = binding.navView.getHeaderView(0)
         val headerBinding = NavHeaderMainBinding.bind(headerView)
 
