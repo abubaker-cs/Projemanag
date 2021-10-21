@@ -101,6 +101,7 @@ class FirestoreClass {
 
                 // We need to check, if the Activity is of a certain type
                 when (activity) {
+
                     is SignInActivity -> {
 
                         // Here call a function of base activity for transferring the result to it.
@@ -122,36 +123,56 @@ class FirestoreClass {
 
             // Failure Action
             .addOnFailureListener { e ->
+
+                when (activity) {
+
+                    is SignInActivity -> {
+
+                        /// We need to hide the hideProgressDialog
+                        // This hideProgressDialog() is in our base activity
+                        activity.hideProgressDialog()
+
+                    }
+
+                    is MainActivity -> {
+
+                        /// We need to hide the hideProgressDialog
+                        activity.hideProgressDialog()
+
+                    }
+
+                }
+
                 Log.e(
                     activity.javaClass.simpleName,
                     "Error while getting loggedIn user details",
                     e
                 )
+
             }
-    }
 
-    /**
-     * A function for getting the user id of current logged user.
-     */
-    fun getCurrentUserID(): String {
+        /**
+         * A function for getting the user id of current logged user.
+         */
+        fun getCurrentUserID(): String {
 
-        // An Instance of currentUser using FirebaseAuth
-        val currentUser = FirebaseAuth.getInstance().currentUser
+            // An Instance of currentUser using FirebaseAuth
+            val currentUser = FirebaseAuth.getInstance().currentUser
 
-        // A variable to assign the currentUserId if it is not null or else it will be blank.
-        var currentUserID = ""
+            // A variable to assign the currentUserId if it is not null or else it will be blank.
+            var currentUserID = ""
 
-        // If the user exists
-        if (currentUser != null) {
-            currentUserID = currentUser.uid
+            // If the user exists
+            if (currentUser != null) {
+                currentUserID = currentUser.uid
+            }
+
+            return currentUserID
+
+            // It will return current user's UID
+            // UID is actually defined in the "Authentication" page for individual users, i.e.:
+            // user xyz@yahoo.com has a UID of HVTXS5nsTyYH6cj1GzRNlIrpLgR5
+            // return FirebaseAuth.getInstance().currentUser!!.uid
         }
 
-        return currentUserID
-
-        // It will return current user's UID
-        // UID is actually defined in the "Authentication" page for individual users, i.e.:
-        // user xyz@yahoo.com has a UID of HVTXS5nsTyYH6cj1GzRNlIrpLgR5
-        // return FirebaseAuth.getInstance().currentUser!!.uid
     }
-
-}
