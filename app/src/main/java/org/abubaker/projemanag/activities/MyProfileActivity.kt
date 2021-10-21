@@ -32,16 +32,28 @@ class MyProfileActivity : BaseActivity() {
      */
     private fun setupActionBar() {
 
+        // Set support or the ActionBar
         setSupportActionBar(binding.toolbarMyProfileActivity)
-
         val actionBar = supportActionBar
+
+        // If Actionbar Exists
         if (actionBar != null) {
+
+            // Enable the ActionBar
             actionBar.setDisplayHomeAsUpEnabled(true)
+
+            // Icon
             actionBar.setHomeAsUpIndicator(R.drawable.ic_white_color_back_24dp)
+
+            // Update the Title
             actionBar.title = resources.getString(R.string.my_profile)
         }
 
-        binding.toolbarMyProfileActivity.setNavigationOnClickListener { onBackPressed() }
+        // On BackPress take the user to the previous screen
+        binding.toolbarMyProfileActivity.setNavigationOnClickListener {
+            onBackPressed()
+        }
+
     }
 
 
