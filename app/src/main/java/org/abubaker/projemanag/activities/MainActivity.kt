@@ -29,9 +29,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // Inflate Layout (XML)
         binding = DataBindingUtil.setContentView(this@MainActivity, R.layout.activity_main)
 
-        // binding = ActivityMainBinding.inflate(layoutInflater)
-        // setContentView(binding.root)
-
         // Setup ActionBar
         setupActionBar()
 
@@ -105,7 +102,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             // My Profile
             R.id.nav_my_profile -> {
 
-                // Toast.makeText(this@MainActivity, "My Profile", Toast.LENGTH_SHORT).show()
+                // Start MyProfileActivity
                 startActivity(Intent(this@MainActivity, MyProfileActivity::class.java))
 
             }
