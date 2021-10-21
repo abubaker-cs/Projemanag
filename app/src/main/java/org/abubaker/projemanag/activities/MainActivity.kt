@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import org.abubaker.projemanag.R
 import org.abubaker.projemanag.databinding.ActivityMainBinding
 import org.abubaker.projemanag.databinding.NavHeaderMainBinding
+import org.abubaker.projemanag.firebase.FirestoreClass
 import org.abubaker.projemanag.models.User
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -36,6 +37,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         // Assign the NavigationView.OnNavigationItemSelectedListener to navigation view.
         binding.navView.setNavigationItemSelectedListener(this)
+
+        // Now depending on the type of Activity, i.e. MainActivity or SignInActivity
+        FirestoreClass().signInUser(this)
 
 
     }
@@ -141,11 +145,16 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         val headerView = binding.navView.getHeaderView(0)
         val headerBinding = NavHeaderMainBinding.bind(headerView)
 
+        // Profile Image
         Glide
             .with(this)
             .load(user.image)
             .centerCrop()
             .placeholder(R.drawable.ic_user_place_holder)
             .into(headerBinding.ivUserImage)
+
+        // Username
+        headerBinding.tvUsername.text = user.name
+
     }
 }
