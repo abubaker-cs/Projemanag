@@ -26,10 +26,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         super.onCreate(savedInstanceState)
 
         // Inflate Layout (XML)
-        // binding = DataBindingUtil.setContentView(this@MainActivity, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this@MainActivity, R.layout.activity_main)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        // binding = ActivityMainBinding.inflate(layoutInflater)
+        // setContentView(binding.root)
 
         // Setup ActionBar
         setupActionBar()
