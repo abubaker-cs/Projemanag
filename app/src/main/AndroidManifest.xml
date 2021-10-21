@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Projemanag">
 
+
         <activity
             android:name=".activities.BaseActivity"
             android:exported="true" />
-
 
         <!-- Splash -->
         <activity
@@ -52,6 +52,13 @@
         <!-- Sign In -->
         <activity
             android:name=".activities.SignInActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar" />
+
+        <!-- My Profile -->
+        <activity
+            android:name=".activities.MyProfileActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBar" />
