@@ -22,9 +22,27 @@ class MyProfileActivity : BaseActivity() {
         binding =
             DataBindingUtil.setContentView(this@MyProfileActivity, R.layout.activity_my_profile)
 
+        // Call a function to setup action bar.
+        setupActionBar()
 
     }
 
+    /**
+     * A function to setup action bar
+     */
+    private fun setupActionBar() {
+
+        setSupportActionBar(binding.toolbarMyProfileActivity)
+
+        val actionBar = supportActionBar
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true)
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_white_color_back_24dp)
+            actionBar.title = resources.getString(R.string.my_profile)
+        }
+
+        binding.toolbarMyProfileActivity.setNavigationOnClickListener { onBackPressed() }
+    }
 
 
 }

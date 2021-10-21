@@ -105,7 +105,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             // My Profile
             R.id.nav_my_profile -> {
 
-                Toast.makeText(this@MainActivity, "My Profile", Toast.LENGTH_SHORT).show()
+                // Toast.makeText(this@MainActivity, "My Profile", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this@MainActivity, MyProfileActivity::class.java))
 
             }
 
