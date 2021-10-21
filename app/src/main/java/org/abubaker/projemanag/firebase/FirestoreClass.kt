@@ -1,9 +1,11 @@
 package org.abubaker.projemanag.firebase
 
+import android.app.Activity
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import org.abubaker.projemanag.activities.MainActivity
 import org.abubaker.projemanag.activities.SignInActivity
 import org.abubaker.projemanag.activities.SignUpActivity
 import org.abubaker.projemanag.models.User
@@ -73,7 +75,8 @@ class FirestoreClass {
     /**
      * A function to SignIn using firebase and GET the user details from Firestore Database.
      */
-    fun signInUser(activity: SignInActivity) {
+    // fun signInUser(activity: SignInActivity) {
+    fun signInUser(activity: Activity) {
 
         // Here we pass the collection name from which we wants the data.
         mFireStore.collection(Constants.USERS)
@@ -96,9 +99,24 @@ class FirestoreClass {
                 // Here we have received the document snapshot which is converted into the User Data model object.
                 val loggedInUser = document.toObject(User::class.java)!!
 
-                // Here call a function of base activity for transferring the result to it.
-                // Note: signInSuccess() function is defined in the activities/SignUpActivity.kt file
-                activity.signInSuccess(loggedInUser)
+                // We need to check, if the Activity is of a certain type
+                when (activity) {
+                    is SignInActivity -> {
+
+                        // Here call a function of base activity for transferring the result to it.
+                        // Note: signInSuccess() function is defined in the activities/SignUpActivity.kt file
+                        activity.signInSuccess(loggedInUser)
+
+                    }
+
+                    is MainActivity -> {
+
+                        //
+                        activity.updateNavigationUserDetails(loggedInUser)
+
+                    }
+                }
+
 
             }
 

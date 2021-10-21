@@ -7,10 +7,13 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import org.abubaker.projemanag.R
 import org.abubaker.projemanag.databinding.ActivityMainBinding
+import org.abubaker.projemanag.databinding.NavHeaderMainBinding
+import org.abubaker.projemanag.models.User
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -23,7 +26,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         super.onCreate(savedInstanceState)
 
         // Inflate Layout (XML)
-        binding = DataBindingUtil.setContentView(this@MainActivity, R.layout.activity_main)
+        // binding = DataBindingUtil.setContentView(this@MainActivity, R.layout.activity_main)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // Setup ActionBar
         setupActionBar()
@@ -123,5 +129,21 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         binding.drawerLayout.closeDrawer(GravityCompat.START)
 
         return true
+    }
+
+    // We want to load image from the User Object (downloaded from Firebase)
+    // defined as image variable in the models/User.kt file
+    // val image: String = "",
+    fun updateNavigationUserDetails(user: User) {
+
+        val headerView = binding.navView.getHeaderView(0)
+        val headerBinding = NavHeaderMainBinding.bind(headerView)
+
+        Glide
+            .with(this)
+            .load(user.image)
+            .centerCrop()
+            .placeholder(R.drawable.ic_user_place_holder)
+            .into(headerBinding.ivUserImage)
     }
 }
