@@ -1,12 +1,12 @@
 package org.abubaker.projemanag.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
 import org.abubaker.projemanag.R
-import org.abubaker.projemanag.databinding.ActivityIntroBinding
 import org.abubaker.projemanag.databinding.ActivityMyProfileBinding
+import org.abubaker.projemanag.firebase.FirestoreClass
+import org.abubaker.projemanag.models.User
 
 class MyProfileActivity : BaseActivity() {
 
@@ -24,6 +24,9 @@ class MyProfileActivity : BaseActivity() {
 
         // Call a function to setup action bar.
         setupActionBar()
+
+        // Call a function to get the current logged in user details
+        FirestoreClass().loadUserData(this@MyProfileActivity)
 
     }
 
@@ -52,6 +55,32 @@ class MyProfileActivity : BaseActivity() {
         // On BackPress take the user to the previous screen
         binding.toolbarMyProfileActivity.setNavigationOnClickListener {
             onBackPressed()
+        }
+
+    }
+
+    /**
+     * A function to set the existing details in UI.
+     */
+    fun setUserDataInUI(user: User) {
+
+        // Thumbnail
+        Glide
+            .with(this@MyProfileActivity)
+            .load(user.image)
+            .centerCrop()
+            .placeholder(R.drawable.ic_user_place_holder)
+            .into(binding.ivUserImage)
+
+        // Username
+        binding.etName.setText(user.name)
+
+        // Email
+        binding.etEmail.setText(user.email)
+
+        // Mobile
+        if (user.mobile != 0L) {
+            binding.etMobile.setText(user.mobile.toString())
         }
 
     }

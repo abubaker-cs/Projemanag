@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import org.abubaker.projemanag.activities.MainActivity
+import org.abubaker.projemanag.activities.MyProfileActivity
 import org.abubaker.projemanag.activities.SignInActivity
 import org.abubaker.projemanag.activities.SignUpActivity
 import org.abubaker.projemanag.models.User
@@ -76,7 +77,7 @@ class FirestoreClass {
      * A function to SignIn using firebase and GET the user details from Firestore Database.
      */
     // fun signInUser(activity: SignInActivity) {
-    fun signInUser(activity: Activity) {
+    fun loadUserData(activity: Activity) {
 
         // Here we pass the collection name from which we wants the data.
         mFireStore.collection(Constants.USERS)
@@ -116,6 +117,15 @@ class FirestoreClass {
                         activity.updateNavigationUserDetails(loggedInUser)
 
                     }
+
+                    is MyProfileActivity -> {
+
+                        //
+                        activity.setUserDataInUI(loggedInUser)
+
+
+                    }
+
                 }
 
 
@@ -139,6 +149,10 @@ class FirestoreClass {
                         /// We need to hide the hideProgressDialog
                         activity.hideProgressDialog()
 
+                    }
+
+                    is MyProfileActivity -> {
+                        activity.hideProgressDialog()
                     }
 
                 }
