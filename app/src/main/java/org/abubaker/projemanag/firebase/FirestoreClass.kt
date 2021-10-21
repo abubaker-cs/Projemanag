@@ -17,7 +17,7 @@ import org.abubaker.projemanag.utils.Constants
  */
 class FirestoreClass {
 
-    // 01 Create a instance of Firebase Firestore
+    // Create an instance of Firebase Firestore
     private val mFireStore = FirebaseFirestore.getInstance()
 
     /**
@@ -100,6 +100,9 @@ class FirestoreClass {
                 // Here we have received the document snapshot which is converted into the User Data model object.
                 val loggedInUser = document.toObject(User::class.java)!!
 
+                // TODO Replace which() with Interfaces
+                // https://www.udemy.com/course/android-kotlin-developer/learn/lecture/18301750#questions/10496002
+
                 // We need to check, if the Activity is of a certain type
                 when (activity) {
 
@@ -113,16 +116,15 @@ class FirestoreClass {
 
                     is MainActivity -> {
 
-                        //
+                        // Initialize: updateNavigationUserDetails() in MainActivity.kt
                         activity.updateNavigationUserDetails(loggedInUser)
 
                     }
 
                     is MyProfileActivity -> {
 
-                        //
+                        // Initialize: setUserDataInUI() defined in the MyProfileActivity.kt
                         activity.setUserDataInUI(loggedInUser)
-
 
                     }
 
