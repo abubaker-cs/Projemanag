@@ -36,23 +36,31 @@ class MyProfileActivity : BaseActivity() {
         // A click event for iv_profile_user_image.)
         binding.ivProfileUserImage.setOnClickListener {
 
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                == PackageManager.PERMISSION_GRANTED
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED
             ) {
 
-                // Call the image chooser function.
+                // Call the image chooser function if the permission was already granted
                 showImageChooser()
 
             } else {
 
-                /*Requests permissions to be granted to this application. These permissions
-                 must be requested in your manifest, they should not be granted to your app,
-                 and they should have protection level*/
+                /* CAUTION:
+
+                    Requests permissions to be granted to this application. These permissions
+                    must be requested in our manifest, they should not be granted to your app,
+                    and they should have protection level.
+
+                 */
+
+                // Ask for Permission: READ_EXTERNAL_STORAGE
                 ActivityCompat.requestPermissions(
                     this,
-                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                    READ_STORAGE_PERMISSION_CODE
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), READ_STORAGE_PERMISSION_CODE
                 )
+
             }
         }
 
