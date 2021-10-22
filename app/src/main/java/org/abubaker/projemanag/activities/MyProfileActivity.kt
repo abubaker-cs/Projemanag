@@ -326,21 +326,32 @@ class MyProfileActivity : BaseActivity() {
      */
     private fun updateUserProfileData() {
 
+        // As a Collection, HashMap can store different types of data in it.
+        // HashMap = Collection in other languages, i.e. in Swift
         val userHashMap = HashMap<String, Any>()
 
+        //
+        // Store records in the userHashMap
+        //
+
+        // Image
         if (mProfileImageURL.isNotEmpty() && mProfileImageURL != mUserDetails.image) {
             userHashMap[Constants.IMAGE] = mProfileImageURL
         }
 
+        // Username
         if (binding.etName.text.toString() != mUserDetails.name) {
             userHashMap[Constants.NAME] = binding.etName.text.toString()
         }
 
+        // Mobile
         if (binding.etMobile.text.toString() != mUserDetails.mobile.toString()) {
             userHashMap[Constants.MOBILE] = binding.etMobile.text.toString().toLong()
         }
 
-        // Update the data in the database.
+        //
+        // Using our HashMap update the database
+        //
         FirestoreClass().updateUserProfileData(this@MyProfileActivity, userHashMap)
     }
 
