@@ -244,21 +244,27 @@ class MyProfileActivity : BaseActivity() {
      */
     private fun uploadUserImage() {
 
+        // Display Message using Progress Dialog
         showProgressDialog(resources.getString(R.string.please_wait))
 
+        // If image path is not null
         if (mSelectedImageFileUri != null) {
 
-            //getting the storage reference
+            // Step 1 - Get the Reference of the location where we need to store our image
             val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
                 "USER_IMAGE" + System.currentTimeMillis() + "." + getFileExtension(
                     mSelectedImageFileUri
                 )
             )
 
-            //adding the file to reference
+            // Step 2 - Using the recently selected reference, now store the image
             sRef.putFile(mSelectedImageFileUri!!)
+
+                // On: Success
                 .addOnSuccessListener { taskSnapshot ->
-                    // The image upload is success
+
+                    // Log: The image upload is success
+                    // Reference: taskSnapshot.metadata!!.reference!!.downloadUrl
                     Log.e(
                         "Firebase Image URL",
                         taskSnapshot.metadata!!.reference!!.downloadUrl.toString()
@@ -267,22 +273,29 @@ class MyProfileActivity : BaseActivity() {
                     // Get the downloadable url from the task snapshot
                     taskSnapshot.metadata!!.reference!!.downloadUrl
                         .addOnSuccessListener { uri ->
+
+                            // Log the uri path
                             Log.e("Downloadable Image URL", uri.toString())
 
-                            // assign the image url to the variable.
+                            // Store image URL in the variable
                             mProfileImageURL = uri.toString()
 
                             // Call a function to update user details in the database.
                             updateUserProfileData()
                         }
                 }
+
+                // On: Failure
                 .addOnFailureListener { exception ->
+
+                    //
                     Toast.makeText(
                         this@MyProfileActivity,
                         exception.message,
                         Toast.LENGTH_LONG
                     ).show()
 
+                    // Hide Progress Dialog
                     hideProgressDialog()
                 }
         }
