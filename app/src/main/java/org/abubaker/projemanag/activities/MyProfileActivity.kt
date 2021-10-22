@@ -74,42 +74,6 @@ class MyProfileActivity : BaseActivity() {
     }
 
     /**
-     * Get the result of the image selection based on the constant code.
-     */
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
-        super.onActivityResult(requestCode, resultCode, data)
-
-        //
-        if (resultCode == Activity.RESULT_OK
-            && requestCode == PICK_IMAGE_REQUEST_CODE
-            && data!!.data != null
-        ) {
-
-            // The uri of selection image from phone storage.
-            mSelectedImageFileUri = data.data
-
-            try {
-
-                // Load the user image in the ImageView.
-                Glide
-                    .with(this@MyProfileActivity)
-                    .load(Uri.parse(mSelectedImageFileUri.toString())) // URI of the image
-                    .centerCrop() // Scale type of the image.
-                    .placeholder(R.drawable.ic_user_place_holder) // A default place holder
-                    .into(binding.ivProfileUserImage) // the view in which the image will be loaded.
-
-
-            } catch (e: IOException) {
-
-                // Display Error
-                e.printStackTrace()
-
-            }
-        }
-    }
-
-    /**
      * This function will identify the result of runtime permission after the user allows or deny permission based on the unique code.
      *
      * @param requestCode
@@ -211,6 +175,42 @@ class MyProfileActivity : BaseActivity() {
 
         // Launches the image selection of phone storage using the constant code.
         startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST_CODE)
+    }
+
+    /**
+     * Get the result of the image selection based on the constant code.
+     */
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        super.onActivityResult(requestCode, resultCode, data)
+
+        // Check if the result code is OK, returned with requestCode and retrieved data is not null
+        if (resultCode == Activity.RESULT_OK
+            && requestCode == PICK_IMAGE_REQUEST_CODE
+            && data!!.data != null
+        ) {
+
+            // The uri of selection image from phone storage.
+            mSelectedImageFileUri = data.data
+
+            try {
+
+                // Load the user image in the ImageView.
+                Glide
+                    .with(this@MyProfileActivity)
+                    .load(Uri.parse(mSelectedImageFileUri.toString())) // URI of the image
+                    .centerCrop() // Scale type of the image.
+                    .placeholder(R.drawable.ic_user_place_holder) // A default place holder
+                    .into(binding.ivProfileUserImage) // the view in which the image will be loaded.
+
+
+            } catch (e: IOException) {
+
+                // Print error on the StackTrace in case if something will wrong
+                e.printStackTrace()
+
+            }
+        }
     }
 
     /**
