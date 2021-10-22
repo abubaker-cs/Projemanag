@@ -147,7 +147,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             .load(user.image)
             .centerCrop()
             .placeholder(R.drawable.ic_user_place_holder)
-            .into(headerBinding.ivUserImage)
+            .into(headerBinding.ivProfileUserImage)
 
         // Username
         headerBinding.tvUsername.text = user.name
