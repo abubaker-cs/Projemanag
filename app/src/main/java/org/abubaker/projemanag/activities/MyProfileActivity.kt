@@ -1,6 +1,12 @@
 package org.abubaker.projemanag.activities
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.provider.MediaStore
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import org.abubaker.projemanag.R
@@ -12,7 +18,6 @@ class MyProfileActivity : BaseActivity() {
 
     // Binding Object
     private lateinit var binding: ActivityMyProfileBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -27,6 +32,29 @@ class MyProfileActivity : BaseActivity() {
 
         // Call a function to get the current logged in user details
         FirestoreClass().loadUserData(this@MyProfileActivity)
+
+        // A click event for iv_profile_user_image.)
+        binding.ivProfileUserImage.setOnClickListener {
+
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                == PackageManager.PERMISSION_GRANTED
+            ) {
+
+                // Call the image chooser function.
+                showImageChooser()
+
+            } else {
+
+                /*Requests permissions to be granted to this application. These permissions
+                 must be requested in your manifest, they should not be granted to your app,
+                 and they should have protection level*/
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                    READ_STORAGE_PERMISSION_CODE
+                )
+            }
+        }
 
     }
 
@@ -70,7 +98,7 @@ class MyProfileActivity : BaseActivity() {
             .load(user.image)
             .centerCrop()
             .placeholder(R.drawable.ic_user_place_holder)
-            .into(binding.ivUserImage)
+            .into(binding.ivProfileUserImage)
 
         // Username
         binding.etName.setText(user.name)
@@ -83,6 +111,32 @@ class MyProfileActivity : BaseActivity() {
             binding.etMobile.setText(user.mobile.toString())
         }
 
+    }
+
+    /**
+     * A function for user profile image selection from phone storage.
+     */
+    private fun showImageChooser() {
+
+        // An intent for launching the image selection of phone storage.
+        val galleryIntent = Intent(
+            Intent.ACTION_PICK,
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        )
+
+        // Launches the image selection of phone storage using the constant code.
+        startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST_CODE)
+    }
+
+    /**
+     * A companion object to declare the constants.
+     */
+    companion object {
+        //A unique code for asking the Read Storage Permission using this we will be check and identify in the method onRequestPermissionsResult
+        private const val READ_STORAGE_PERMISSION_CODE = 1
+
+        // A constant for image selection from phone storage
+        private const val PICK_IMAGE_REQUEST_CODE = 2
     }
 
 
