@@ -1,10 +1,13 @@
 package org.abubaker.projemanag.activities
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -13,11 +16,15 @@ import org.abubaker.projemanag.R
 import org.abubaker.projemanag.databinding.ActivityMyProfileBinding
 import org.abubaker.projemanag.firebase.FirestoreClass
 import org.abubaker.projemanag.models.User
+import java.io.IOException
 
 class MyProfileActivity : BaseActivity() {
 
     // Binding Object
     private lateinit var binding: ActivityMyProfileBinding
+
+    // Add a global variable for URI of a selected image from phone storage.
+    private var mSelectedImageFileUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -64,6 +71,76 @@ class MyProfileActivity : BaseActivity() {
             }
         }
 
+    }
+
+    /**
+     * Get the result of the image selection based on the constant code.
+     */
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        super.onActivityResult(requestCode, resultCode, data)
+
+        //
+        if (resultCode == Activity.RESULT_OK
+            && requestCode == PICK_IMAGE_REQUEST_CODE
+            && data!!.data != null
+        ) {
+
+            // The uri of selection image from phone storage.
+            mSelectedImageFileUri = data.data
+
+            try {
+
+                // Load the user image in the ImageView.
+                Glide
+                    .with(this@MyProfileActivity)
+                    .load(Uri.parse(mSelectedImageFileUri.toString())) // URI of the image
+                    .centerCrop() // Scale type of the image.
+                    .placeholder(R.drawable.ic_user_place_holder) // A default place holder
+                    .into(binding.ivProfileUserImage) // the view in which the image will be loaded.
+
+
+            } catch (e: IOException) {
+
+                // Display Error
+                e.printStackTrace()
+
+            }
+        }
+    }
+
+    /**
+     * This function will identify the result of runtime permission after the user allows or deny permission based on the unique code.
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == READ_STORAGE_PERMISSION_CODE) {
+
+            //If permission is granted
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                // Call the image chooser function.
+                showImageChooser()
+
+            } else {
+
+                //Displaying another toast if permission is not granted
+                Toast.makeText(
+                    this,
+                    "Oops, you just denied the permission for storage. You can also allow it from settings.",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
+        }
     }
 
     /**
