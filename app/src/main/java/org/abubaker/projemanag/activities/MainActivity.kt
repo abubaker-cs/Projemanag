@@ -125,7 +125,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 // Initialize
                 startActivity(intent)
 
-
                 finish()
             }
 
