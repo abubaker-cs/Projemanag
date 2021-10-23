@@ -136,25 +136,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         return true
     }
 
-    /**
-     * Receives the result's status from the MyProfileActivity.kt
-     */
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (resultCode == Activity.RESULT_OK && requestCode == MY_PROFILE_REQUEST_CODE) {
-
-            // Get the user updated details, so the Thumbnail can be refreshed in the Drawer
-            FirestoreClass().loadUserData(this@MainActivity)
-
-        } else {
-
-            // Log
-            Log.e("Cancelled", "Cancelled")
-
-        }
-    }
-
     // We want to load image from the User Object (downloaded from Firebase)
     // defined as image variable in the models/User.kt file
     // val image: String = "",
@@ -176,6 +157,25 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // Username
         headerBinding.tvUsername.text = user.name
 
+    }
+
+    /**
+     * Receives the result's status from the MyProfileActivity.kt
+     */
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK && requestCode == MY_PROFILE_REQUEST_CODE) {
+
+            // Get the user updated details, so the Thumbnail can be refreshed in the Drawer
+            FirestoreClass().loadUserData(this@MainActivity)
+
+        } else {
+
+            // Log
+            Log.e("Cancelled", "Cancelled")
+
+        }
     }
 
     /**
