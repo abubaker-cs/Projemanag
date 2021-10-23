@@ -38,6 +38,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // Now depending on the type of Activity, i.e. MainActivity or SignInActivity
         FirestoreClass().loadUserData(this)
 
+        // Todo FAB
+
 
     }
 
