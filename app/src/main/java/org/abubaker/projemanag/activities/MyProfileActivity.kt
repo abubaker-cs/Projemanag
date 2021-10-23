@@ -91,7 +91,6 @@ class MyProfileActivity : BaseActivity() {
             // Here if the image is not selected then update the other details of user.
             if (mSelectedImageFileUri != null) {
 
-
                 // Initialize the uploadUserImage() function
                 uploadUserImage()
 
@@ -386,6 +385,10 @@ class MyProfileActivity : BaseActivity() {
 
         // Hide Progress Dialog
         hideProgressDialog()
+
+        // Now we are sending back the result's status to the MainActivity which will be
+        // retrieved by the companion object MY_PROFILE_REQUEST_CODE
+        setResult(Activity.RESULT_OK)
 
         // End
         finish()

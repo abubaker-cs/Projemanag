@@ -1,7 +1,9 @@
 package org.abubaker.projemanag.activities
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
@@ -101,7 +103,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             R.id.nav_my_profile -> {
 
                 // Start MyProfileActivity
-                startActivity(Intent(this@MainActivity, MyProfileActivity::class.java))
+                startActivityForResult(
+                    Intent(this@MainActivity, MyProfileActivity::class.java),
+                    MY_PROFILE_REQUEST_CODE
+                )
 
             }
 
@@ -131,6 +136,25 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         return true
     }
 
+    /**
+     * Receives the result's status from the MyProfileActivity.kt
+     */
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK && requestCode == MY_PROFILE_REQUEST_CODE) {
+
+            // Get the user updated details, so the Thumbnail can be refreshed in the Drawer
+            FirestoreClass().loadUserData(this@MainActivity)
+
+        } else {
+
+            // Log
+            Log.e("Cancelled", "Cancelled")
+
+        }
+    }
+
     // We want to load image from the User Object (downloaded from Firebase)
     // defined as image variable in the models/User.kt file
     // val image: String = "",
@@ -151,6 +175,16 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         // Username
         headerBinding.tvUsername.text = user.name
+
+    }
+
+    /**
+     * A companion object to declare the constants.
+     */
+    companion object {
+
+        //A unique code for starting the activity for result
+        const val MY_PROFILE_REQUEST_CODE: Int = 11
 
     }
 }
