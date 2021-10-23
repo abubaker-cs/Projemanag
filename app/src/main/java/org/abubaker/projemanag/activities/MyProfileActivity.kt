@@ -341,6 +341,9 @@ class MyProfileActivity : BaseActivity() {
         // HashMap = Collection in other languages, i.e. in Swift
         val userHashMap = HashMap<String, Any>()
 
+        // We will update our database only if there was any anyChange made by the user
+        var anyChangesMade = false
+
         //
         // Store records in the userHashMap
         //
@@ -348,22 +351,28 @@ class MyProfileActivity : BaseActivity() {
         // Image
         if (mProfileImageURL.isNotEmpty() && mProfileImageURL != mUserDetails.image) {
             userHashMap[Constants.IMAGE] = mProfileImageURL
+            anyChangesMade = true
         }
 
         // Username
         if (binding.etName.text.toString() != mUserDetails.name) {
             userHashMap[Constants.NAME] = binding.etName.text.toString()
+            anyChangesMade = true
         }
 
         // Mobile
         if (binding.etMobile.text.toString() != mUserDetails.mobile.toString()) {
             userHashMap[Constants.MOBILE] = binding.etMobile.text.toString().toLong()
+            anyChangesMade = true
         }
 
         //
         // Using our HashMap update the database
         //
-        FirestoreClass().updateUserProfileData(this@MyProfileActivity, userHashMap)
+        if (anyChangesMade) {
+            FirestoreClass().updateUserProfileData(this@MyProfileActivity, userHashMap)
+        }
+
     }
 
     /**
