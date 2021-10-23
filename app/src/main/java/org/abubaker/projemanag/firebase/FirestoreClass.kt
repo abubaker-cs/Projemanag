@@ -169,26 +169,39 @@ class FirestoreClass {
             }
     }
 
+    /**
+     * A function to update the user profile data into the database.
+     */
     fun updateUserProfileData(activity: MyProfileActivity, userHashMap: HashMap<String, Any>) {
-        mFireStore.collection(Constants.USERS) // Collection Name
-            .document(getCurrentUserID()) // Document ID
-            .update(userHashMap) // A hashmap of fields which are to be updated.
-            .addOnSuccessListener {
-                // Profile data is updated successfully.
-                Log.e(activity.javaClass.simpleName, "Profile Data updated successfully!")
 
+        // Collection Name
+        mFireStore.collection(Constants.USERS)
+
+            // Document ID
+            .document(getCurrentUserID())
+
+            // A hashmap of fields which are to be updated.
+            .update(userHashMap)
+
+            // On: Success
+            .addOnSuccessListener {
+
+                // Log + Toast: Profile data is updated successfully.
+                Log.e(activity.javaClass.simpleName, "Profile Data updated successfully!")
                 Toast.makeText(activity, "Profile updated successfully!", Toast.LENGTH_SHORT).show()
 
                 // Notify the success result.
                 activity.profileUpdateSuccess()
             }
+
+            // On: Failure
             .addOnFailureListener { e ->
+
+                // hideProgressDialog
                 activity.hideProgressDialog()
-                Log.e(
-                    activity.javaClass.simpleName,
-                    "Error while creating a board.",
-                    e
-                )
+
+                // Log
+                Log.e(activity.javaClass.simpleName, "Error while creating a board.", e)
             }
     }
 

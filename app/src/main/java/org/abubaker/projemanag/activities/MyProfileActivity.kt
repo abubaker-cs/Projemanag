@@ -82,14 +82,22 @@ class MyProfileActivity : BaseActivity() {
             }
         }
 
-        // Add a click event for updating the user profile data to the database.
+        /**
+         * Button: Update
+         * Add a click event for updating the user profile data to the database.
+         */
         binding.btnUpdate.setOnClickListener {
+
             // Here if the image is not selected then update the other details of user.
             if (mSelectedImageFileUri != null) {
 
+
+                // Initialize the uploadUserImage() function
                 uploadUserImage()
+
             } else {
 
+                // Show Progress Dialog
                 showProgressDialog(resources.getString(R.string.please_wait))
 
                 // Call a function to update user details in the database.
@@ -288,14 +296,14 @@ class MyProfileActivity : BaseActivity() {
                 // On: Failure
                 .addOnFailureListener { exception ->
 
-                    //
+                    // Display Message
                     Toast.makeText(
                         this@MyProfileActivity,
                         exception.message,
                         Toast.LENGTH_LONG
                     ).show()
 
-                    // Hide Progress Dialog
+                    // Hide Progress Dialog fore displaying the error
                     hideProgressDialog()
                 }
         }
@@ -360,9 +368,12 @@ class MyProfileActivity : BaseActivity() {
      */
     fun profileUpdateSuccess() {
 
+        // Hide Progress Dialog
         hideProgressDialog()
 
+        // End
         finish()
+
     }
 
     /**
