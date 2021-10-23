@@ -370,7 +370,11 @@ class MyProfileActivity : BaseActivity() {
         // Using our HashMap update the database
         //
         if (anyChangesMade) {
+
             FirestoreClass().updateUserProfileData(this@MyProfileActivity, userHashMap)
+
+            // hideProgressDialog
+            hideProgressDialog()
         }
 
     }
