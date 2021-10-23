@@ -175,6 +175,9 @@ class MyProfileActivity : BaseActivity() {
      */
     fun setUserDataInUI(user: User) {
 
+        // Initialize the user details variable
+        mUserDetails = user
+
         // Thumbnail
         Glide
             .with(this@MyProfileActivity)

@@ -171,6 +171,12 @@ class FirestoreClass {
 
     /**
      * A function to update the user profile data into the database.
+     *
+     * HashMap<String, Any>
+     * Key: String
+     * Value: Any (kotlin), Object (Java)
+     *
+     * We will pass the user, as a HashMap
      */
     fun updateUserProfileData(activity: MyProfileActivity, userHashMap: HashMap<String, Any>) {
 
@@ -202,6 +208,7 @@ class FirestoreClass {
 
                 // Log
                 Log.e(activity.javaClass.simpleName, "Error while creating a board.", e)
+                Toast.makeText(activity, "Error when updating the profile!", Toast.LENGTH_SHORT).show()
             }
     }
 
