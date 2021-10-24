@@ -49,7 +49,7 @@ class MyProfileActivity : BaseActivity() {
         setupActionBar()
 
         // Call a function to get the current logged in user details
-        FirestoreClass().loadUserData(this@MyProfileActivity)
+        FirestoreClass().loadUserData(this)
 
         // A click event for iv_profile_user_image.)
         binding.ivProfileUserImage.setOnClickListener {
@@ -61,7 +61,7 @@ class MyProfileActivity : BaseActivity() {
             ) {
 
                 // Call the image chooser function if the permission was already granted
-                showImageChooser()
+                Constants.showImageChooser(this@MyProfileActivity)
 
             } else {
 
@@ -76,7 +76,8 @@ class MyProfileActivity : BaseActivity() {
                 // Ask for Permission: READ_EXTERNAL_STORAGE
                 ActivityCompat.requestPermissions(
                     this,
-                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), READ_STORAGE_PERMISSION_CODE
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                    Constants.READ_STORAGE_PERMISSION_CODE
                 )
 
             }
@@ -119,13 +120,13 @@ class MyProfileActivity : BaseActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == READ_STORAGE_PERMISSION_CODE) {
+        if (requestCode == Constants.READ_STORAGE_PERMISSION_CODE) {
 
             //If permission is granted
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                 // Call the image chooser function.
-                showImageChooser()
+                Constants.showImageChooser(this)
 
             } else {
 
@@ -199,21 +200,6 @@ class MyProfileActivity : BaseActivity() {
     }
 
     /**
-     * A function for user profile image selection from phone storage.
-     */
-    private fun showImageChooser() {
-
-        // An intent for launching the image selection of phone storage.
-        val galleryIntent = Intent(
-            Intent.ACTION_PICK,
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-        )
-
-        // Launches the image selection of phone storage using the constant code.
-        startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST_CODE)
-    }
-
-    /**
      * Get the result of the image selection based on the constant code.
      */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -222,7 +208,7 @@ class MyProfileActivity : BaseActivity() {
 
         // Check if the result code is OK, returned with requestCode and retrieved data is not null
         if (resultCode == Activity.RESULT_OK
-            && requestCode == PICK_IMAGE_REQUEST_CODE
+            && requestCode == Constants.PICK_IMAGE_REQUEST_CODE
             && data!!.data != null
         ) {
 
@@ -262,7 +248,8 @@ class MyProfileActivity : BaseActivity() {
 
             // Step 1 - Get the Reference of the location where we need to store our image
             val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
-                "USER_IMAGE" + System.currentTimeMillis() + "." + getFileExtension(
+                "USER_IMAGE" + System.currentTimeMillis() + "." + Constants.getFileExtension(
+                    this,
                     mSelectedImageFileUri
                 )
             )
@@ -309,26 +296,6 @@ class MyProfileActivity : BaseActivity() {
                     hideProgressDialog()
                 }
         }
-    }
-
-    /**
-     * A function to get the extension of selected image.
-     */
-    private fun getFileExtension(uri: Uri?): String? {
-        /*
-         * MimeTypeMap: Two-way map that maps MIME-types to file extensions and vice versa.
-         *
-         * getSingleton(): Get the singleton instance of MimeTypeMap.
-         *
-         * getExtensionFromMimeType: Return the registered extension for the given MIME type.
-         *
-         * contentResolver.getType: Return the MIME type of the given content URL.
-         */
-        return MimeTypeMap
-            .getSingleton()
-            .getExtensionFromMimeType(
-                contentResolver.getType(uri!!)
-            )
     }
 
     /**
@@ -393,17 +360,6 @@ class MyProfileActivity : BaseActivity() {
         // End
         finish()
 
-    }
-
-    /**
-     * A companion object to declare the constants.
-     */
-    companion object {
-        //A unique code for asking the Read Storage Permission using this we will be check and identify in the method onRequestPermissionsResult
-        private const val READ_STORAGE_PERMISSION_CODE = 1
-
-        // A constant for image selection from phone storage
-        private const val PICK_IMAGE_REQUEST_CODE = 2
     }
 
 
