@@ -52,14 +52,6 @@ class CreateBoardActivity : BaseActivity() {
 
             } else {
 
-                /* CAUTION:
-
-                    Requests permissions to be granted to this application. These permissions
-                    must be requested in our manifest, they should not be granted to your app,
-                    and they should have protection level.
-
-                 */
-
                 // Ask for Permission: READ_EXTERNAL_STORAGE
                 ActivityCompat.requestPermissions(
                     this,
