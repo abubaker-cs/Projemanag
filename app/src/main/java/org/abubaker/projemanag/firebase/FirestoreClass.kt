@@ -93,9 +93,7 @@ class FirestoreClass {
             .addOnSuccessListener { document ->
 
                 // Print Log Message
-                Log.e(
-                    activity.javaClass.simpleName, document.toString()
-                )
+                // Log.e(activity.javaClass.simpleName, document.toString())
 
                 // Since our .document() has all the user details, we can get additional information form it below:
                 // Here we have received the document snapshot which is converted into the User Data model object.
@@ -131,7 +129,6 @@ class FirestoreClass {
 
                 }
 
-
             }
 
             // Failure Action
@@ -160,11 +157,7 @@ class FirestoreClass {
 
                 }
 
-                Log.e(
-                    activity.javaClass.simpleName,
-                    "Error while getting loggedIn user details",
-                    e
-                )
+                // Log.e(activity.javaClass.simpleName, "Error while getting loggedIn user details", e)
 
             }
     }

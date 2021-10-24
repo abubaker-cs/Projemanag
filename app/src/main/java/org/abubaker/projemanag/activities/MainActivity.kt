@@ -149,7 +149,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         // Profile Image
         Glide
-            .with(this)
+            .with(this@MainActivity)
             .load(user.image)
             .centerCrop()
             .placeholder(R.drawable.ic_user_place_holder)
@@ -187,7 +187,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     companion object {
 
         //A unique code for starting the activity for result
-        const val MY_PROFILE_REQUEST_CODE: Int = 11
+        val MY_PROFILE_REQUEST_CODE: Int = 11
 
     }
 }
