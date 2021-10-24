@@ -1,11 +1,14 @@
 package org.abubaker.projemanag.activities
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import org.abubaker.projemanag.R
@@ -31,6 +34,41 @@ class CreateBoardActivity : BaseActivity() {
 
         // Call the setup action bar function
         setupActionBar()
+
+        /**
+         * Select Image
+         */
+        // A click event for iv_profile_user_image.)
+        binding.ivBoardImage.setOnClickListener {
+
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+
+                // Call the image chooser function if the permission was already granted
+                Constants.showImageChooser(this@CreateBoardActivity)
+
+            } else {
+
+                /* CAUTION:
+
+                    Requests permissions to be granted to this application. These permissions
+                    must be requested in our manifest, they should not be granted to your app,
+                    and they should have protection level.
+
+                 */
+
+                // Ask for Permission: READ_EXTERNAL_STORAGE
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                    Constants.READ_STORAGE_PERMISSION_CODE
+                )
+
+            }
+        }
     }
 
 
