@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
@@ -145,7 +147,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // Based on solution provided by Helder
         // URL: https://www.udemy.com/course/android-kotlin-developer/learn/lecture/18301726#questions/14389880
         val headerView = binding.navView.getHeaderView(0)
-        val headerBinding = NavHeaderMainBinding.bind(headerView)
+        val headerBinding = headerView.findViewById<ImageView>(R.id.iv_profile_user_image)
 
         // Profile Image
         Glide
@@ -153,10 +155,26 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             .load(user.image)
             .centerCrop()
             .placeholder(R.drawable.ic_user_place_holder)
-            .into(headerBinding.ivProfileUserImage)
+            .into(headerBinding)
 
         // Username
-        headerBinding.tvUsername.text = user.name
+        headerView.findViewById<TextView>(R.id.tv_username).text = user.name
+
+
+//        val headerView = binding.navView.getHeaderView(0)
+//        val headerBinding = NavHeaderMainBinding.bind(headerView)
+//
+//
+//        // Profile Image
+//        Glide
+//            .with(this@MainActivity)
+//            .load(user.image)
+//            .centerCrop()
+//            .placeholder(R.drawable.ic_user_place_holder)
+//            .into(headerBinding.ivProfileUserImage)
+//
+//        // Username
+//        headerBinding.tvUsername.text = user.name
 
     }
 
@@ -191,3 +209,4 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     }
 }
+
