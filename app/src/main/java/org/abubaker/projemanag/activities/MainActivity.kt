@@ -17,11 +17,25 @@ import org.abubaker.projemanag.databinding.ActivityMainBinding
 import org.abubaker.projemanag.databinding.NavHeaderMainBinding
 import org.abubaker.projemanag.firebase.FirestoreClass
 import org.abubaker.projemanag.models.User
+import org.abubaker.projemanag.utils.Constants
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    /**
+     * A companion object to declare the constants.
+     */
+    companion object {
+
+        //A unique code for starting the activity for result
+        val MY_PROFILE_REQUEST_CODE: Int = 11
+
+    }
+
     // Binding Object
     private lateinit var binding: ActivityMainBinding
+
+    // Username
+    private lateinit var mUserName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -42,7 +56,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         // FAB: Launch the Create Board screen on a fab button click.
         binding.mainAppBarLayout.fabCreateBoard.setOnClickListener {
-            startActivity(Intent(this@MainActivity, CreateBoardActivity::class.java))
+            val intent = Intent(this@MainActivity, CreateBoardActivity::class.java)
+            intent.putExtra(Constants.NAME, mUserName)
+            startActivity(intent)
         }
 
     }
@@ -151,6 +167,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         val headerView = binding.navView.getHeaderView(0)
         val headerBinding = headerView.findViewById<ImageView>(R.id.iv_profile_user_image)
 
+        // Username
+        mUserName = user.name
+
         // Profile Image
         Glide
             .with(this@MainActivity)
@@ -203,14 +222,5 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
     }
 
-    /**
-     * A companion object to declare the constants.
-     */
-    companion object {
-
-        //A unique code for starting the activity for result
-        val MY_PROFILE_REQUEST_CODE: Int = 11
-
-    }
 }
 
