@@ -362,5 +362,4 @@ class MyProfileActivity : BaseActivity() {
 
     }
 
-
 }
