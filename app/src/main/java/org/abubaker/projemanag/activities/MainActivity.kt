@@ -40,8 +40,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // Now depending on the type of Activity, i.e. MainActivity or SignInActivity
         FirestoreClass().loadUserData(this)
 
-        // Todo FAB
-
+        // FAB: Launch the Create Board screen on a fab button click.
+        binding.mainAppBarLayout.fabCreateBoard.setOnClickListener {
+            startActivity(Intent(this@MainActivity, CreateBoardActivity::class.java))
+        }
 
     }
 
