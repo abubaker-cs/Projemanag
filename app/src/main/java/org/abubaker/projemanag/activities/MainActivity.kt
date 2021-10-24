@@ -161,6 +161,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         headerView.findViewById<TextView>(R.id.tv_username).text = user.name
 
 
+//  TODO: NavHeaderMainBinding.bind(headerView) is crashing the app after data is being updated
+//
 //        val headerView = binding.navView.getHeaderView(0)
 //        val headerBinding = NavHeaderMainBinding.bind(headerView)
 //
