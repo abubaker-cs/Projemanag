@@ -6,9 +6,11 @@
         <entry key="app/src/main/res/drawable-ldpi/ic_white_color_back_24dp.xml" value="0.36205128205128206" />
         <entry key="app/src/main/res/drawable-mdpi/nav_header_main_background.xml" value="0.36205128205128206" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.36770833333333336" />
+        <entry key="app/src/main/res/drawable/ic_vector_add_24dp.xml" value="0.36205128205128206" />
         <entry key="app/src/main/res/drawable/shape_button_rounded.xml" value="0.36770833333333336" />
         <entry key="app/src/main/res/drawable/white_border_shape_button_rounded.xml" value="0.36770833333333336" />
         <entry key="app/src/main/res/layout/activity_base.xml" value="0.3515625" />
+        <entry key="app/src/main/res/layout/activity_create_board.xml" value="0.3515625" />
         <entry key="app/src/main/res/layout/activity_intro.xml" value="0.3515625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3515625" />
         <entry key="app/src/main/res/layout/activity_my_profile.xml" value="0.3515625" />
