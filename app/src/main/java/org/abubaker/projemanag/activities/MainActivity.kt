@@ -56,8 +56,15 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         // FAB: Launch the Create Board screen on a fab button click.
         binding.mainAppBarLayout.fabCreateBoard.setOnClickListener {
+
+            // Setting parameters for the intent, i.e our objective is to open CreateBoardActivity
             val intent = Intent(this@MainActivity, CreateBoardActivity::class.java)
+
+            // We are sending the USERNAME to the CreateBoardActivity which we retrieved
+            // in the updateNavigationUserDetails() function
             intent.putExtra(Constants.NAME, mUserName)
+
+            // Initialize the intent
             startActivity(intent)
         }
 
