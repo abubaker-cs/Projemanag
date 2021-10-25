@@ -40,8 +40,8 @@ class CreateBoardActivity : BaseActivity() {
         /**
          * Capturing the username
          */
-        if(intent.hasExtra(Constants.NAME)){
-            mUserName = intent.getStringExtra(Constants.NAME)
+        if (intent.hasExtra(Constants.NAME)) {
+            mUserName = intent.getStringExtra(Constants.NAME)!!
         }
 
         /**
