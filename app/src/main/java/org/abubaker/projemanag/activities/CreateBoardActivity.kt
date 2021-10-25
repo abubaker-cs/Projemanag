@@ -38,7 +38,7 @@ class CreateBoardActivity : BaseActivity() {
         setupActionBar()
 
         /**
-         * Capturing the username
+         * Capturing the username from the intent
          */
         if (intent.hasExtra(Constants.NAME)) {
             mUserName = intent.getStringExtra(Constants.NAME)!!
@@ -170,6 +170,16 @@ class CreateBoardActivity : BaseActivity() {
 
             }
         }
+    }
+
+    /**
+     * A function for notifying the board is created successfully.
+     */
+    fun boardCreatedSuccessfully() {
+
+        hideProgressDialog()
+
+        finish()
     }
 
 
