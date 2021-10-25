@@ -10,18 +10,34 @@ data class Board(
     val assignedTo: ArrayList<String> = ArrayList()
 ) : Parcelable {
     constructor(source: Parcel) : this(
+
+        // Name
         source.readString()!!,
+
+        // Image
         source.readString()!!,
+
+        // Created By
         source.readString()!!,
+
+        // Assigned To
         source.createStringArrayList()!!
     )
 
     override fun describeContents() = 0
 
     override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
+
+        // Name
         writeString(name)
+
+        // Image
         writeString(image)
+
+        // Created By
         writeString(createdBy)
+
+        // Assigned To
         writeStringList(assignedTo)
     }
 
