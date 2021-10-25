@@ -27,7 +27,6 @@ class CreateBoardActivity : BaseActivity() {
     // Catch the data sent by MainActivity
     private lateinit var mUserName: String
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
