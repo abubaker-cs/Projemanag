@@ -211,32 +211,30 @@ class FirestoreClass {
 
         mFireStore.collection(Constants.BOARDS)
 
-            //
+            // Returns a DocumentReference pointing to a new document with an auto-generated ID.
             .document()
 
-            //
+            // We are asking that instead of overwriting, just  merge the existing data
             .set(board, SetOptions.merge())
 
-            //
+            // Success
             .addOnSuccessListener {
 
-                //
+                // Log + Toast: Board created successfully.
                 Log.e(activity.javaClass.simpleName, "Board created successfully.")
-
-                //
                 Toast.makeText(activity, "Board created successfully.", Toast.LENGTH_SHORT).show()
 
-                //
+                // Hides the Progress Dialog and finish() the task.
                 activity.boardCreatedSuccessfully()
             }
 
-            //
+            // Failure
             .addOnFailureListener { e ->
 
-                //
+                // Hide the Progress Dialog
                 activity.hideProgressDialog()
 
-                //
+                // Log: Error
                 Log.e(activity.javaClass.simpleName, "Error while creating a board.", e)
             }
     }
