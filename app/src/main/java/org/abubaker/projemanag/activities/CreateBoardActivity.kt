@@ -24,6 +24,9 @@ class CreateBoardActivity : BaseActivity() {
     // Add a global variable for URI of a selected image from phone storage.
     private var mSelectedImageFileUri: Uri? = null
 
+    // Catch the data sent by MainActivity
+    private lateinit var mUserName: String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +37,13 @@ class CreateBoardActivity : BaseActivity() {
 
         // Call the setup action bar function
         setupActionBar()
+
+        /**
+         * Capturing the username
+         */
+        if(intent.hasExtra(Constants.NAME)){
+            mUserName = intent.getStringExtra(Constants.NAME)
+        }
 
         /**
          * Select Image

@@ -51,7 +51,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // Assign the NavigationView.OnNavigationItemSelectedListener to navigation view.
         binding.navView.setNavigationItemSelectedListener(this)
 
-        // Now depending on the type of Activity, i.e. MainActivity or SignInActivity
+        // Load user's data from the database
+        // >>> Now depending on the type of Activity, i.e. MainActivity or SignInActivity
         FirestoreClass().loadUserData(this)
 
         // FAB: Launch the Create Board screen on a fab button click.
