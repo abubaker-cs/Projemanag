@@ -25,11 +25,23 @@ data class User(
 
 ) : Parcelable {
     constructor(source: Parcel) : this(
+
+        // ID
         source.readString()!!,
+
+        // Username
         source.readString()!!,
+
+        // Email
         source.readString()!!,
+
+        // Profile Picture (path)
         source.readString()!!,
+
+        // Mobile Number
         source.readLong(),
+
+        // FCM Token
         source.readString()!!
     )
 
@@ -37,11 +49,23 @@ data class User(
 
     // Write values using variables defined in the "data class User" above
     override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
+
+        // ID
         writeString(id)
+
+        // Name
         writeString(name)
+
+        // Email
         writeString(email)
+
+        // Profile Picture (path)
         writeString(image)
+
+        // Mobile Number
         writeLong(mobile)
+
+        // FCM Token
         writeString(fcmToken)
     }
 
