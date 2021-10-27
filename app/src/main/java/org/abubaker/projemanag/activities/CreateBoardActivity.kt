@@ -6,11 +6,14 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import org.abubaker.projemanag.R
 import org.abubaker.projemanag.databinding.ActivityCreateBoardBinding
 import org.abubaker.projemanag.firebase.FirestoreClass
@@ -189,16 +192,79 @@ class CreateBoardActivity : BaseActivity() {
         // adding the current user id.
         assignedUsersArrayList.add(getCurrentUserID())
 
-        // Creating the instance of the Board and adding the values as per parameters.
+        // Creating the instance (object) of the Board and adding the values as per parameters.
         val board = Board(
+
+            // Name of the Board
             binding.etBoardName.text.toString(),
+
+            // Image Path
             mBoardImageURL,
+
+            // Username
             mUserName,
+
+            // Assign User to the ArrayList
             assignedUsersArrayList
         )
 
-        //
+        // Create actual Board in the Firestore (Activity, board (details))
         FirestoreClass().createBoard(this@CreateBoardActivity, board)
+    }
+
+    /**
+     * A function to upload the Board Image to storage and getting the downloadable URL of the image.
+     */
+    private fun uploadBoardImage() {
+        showProgressDialog(resources.getString(R.string.please_wait))
+
+        //getting the storage reference
+        val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
+
+            //
+            "BOARD_IMAGE" + System.currentTimeMillis() + "." + Constants.getFileExtension(
+                this@CreateBoardActivity,
+                mSelectedImageFileUri
+            )
+        )
+
+        //adding the file to reference
+        sRef.putFile(mSelectedImageFileUri!!)
+
+            // On: Success
+            .addOnSuccessListener { taskSnapshot ->
+
+                // The image upload is success
+                Log.e(
+                    "Firebase Image URL",
+                    taskSnapshot.metadata!!.reference!!.downloadUrl.toString()
+                )
+
+                // Get the downloadable url from the task snapshot
+                taskSnapshot.metadata!!.reference!!.downloadUrl
+                    .addOnSuccessListener { uri ->
+
+                        // Log:
+                        Log.e("Downloadable Image URL", uri.toString())
+
+                        // assign the image url to the variable.
+                        mBoardImageURL = uri.toString()
+
+                        // Call a function to create the board.
+                        createBoard()
+                    }
+            }
+
+            // On: Failure
+            .addOnFailureListener { exception ->
+                Toast.makeText(
+                    this@CreateBoardActivity,
+                    exception.message,
+                    Toast.LENGTH_LONG
+                ).show()
+
+                hideProgressDialog()
+            }
     }
 
     /**
