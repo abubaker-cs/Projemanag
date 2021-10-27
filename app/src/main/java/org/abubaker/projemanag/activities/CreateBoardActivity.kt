@@ -55,7 +55,7 @@ class CreateBoardActivity : BaseActivity() {
         /**
          * Select Image
          */
-        // A click event for iv_profile_user_image.)
+        // A click event for iv_board_image.)
         binding.ivBoardImage.setOnClickListener {
 
             if (ContextCompat.checkSelfPermission(
@@ -76,6 +76,27 @@ class CreateBoardActivity : BaseActivity() {
                     Constants.READ_STORAGE_PERMISSION_CODE
                 )
 
+            }
+        }
+
+        /**
+         * Button: Add a click event to Create (Board)
+         **/
+        binding.btnCreate.setOnClickListener {
+
+            // Here if the image is not selected then update the other details of user.
+            if (mSelectedImageFileUri != null) {
+
+                // Upload image
+                uploadBoardImage()
+
+            } else {
+
+                // Progress Dialog Message: Please wait
+                showProgressDialog(resources.getString(R.string.please_wait))
+
+                // Call a function to update create a board.
+                createBoard()
             }
         }
     }
