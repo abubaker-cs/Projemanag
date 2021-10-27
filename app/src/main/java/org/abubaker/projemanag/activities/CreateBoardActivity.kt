@@ -181,38 +181,6 @@ class CreateBoardActivity : BaseActivity() {
     }
 
     /**
-     * A function to make an entry of a board in the database.
-     */
-    private fun createBoard() {
-
-        //  A list is created to add the assigned members.
-        //  This can be modified later on as of now the user itself will be the member of the board.
-        val assignedUsersArrayList: ArrayList<String> = ArrayList()
-
-        // adding the current user id.
-        assignedUsersArrayList.add(getCurrentUserID())
-
-        // Creating the instance (object) of the Board and adding the values as per parameters.
-        val board = Board(
-
-            // Name of the Board
-            binding.etBoardName.text.toString(),
-
-            // Image Path
-            mBoardImageURL,
-
-            // Username
-            mUserName,
-
-            // Assign User to the ArrayList
-            assignedUsersArrayList
-        )
-
-        // Create actual Board in the Firestore (Activity, board (details))
-        FirestoreClass().createBoard(this@CreateBoardActivity, board)
-    }
-
-    /**
      * A function to upload the Board Image to storage and getting the downloadable URL of the image.
      */
     private fun uploadBoardImage() {
@@ -267,6 +235,38 @@ class CreateBoardActivity : BaseActivity() {
 
                 hideProgressDialog()
             }
+    }
+
+    /**
+     * A function to make an entry of a board in the database.
+     */
+    private fun createBoard() {
+
+        //  A list is created to add the assigned members.
+        //  This can be modified later on as of now the user itself will be the member of the board.
+        val assignedUsersArrayList: ArrayList<String> = ArrayList()
+
+        // adding the current user id.
+        assignedUsersArrayList.add(getCurrentUserID())
+
+        // Creating the instance (object) of the Board and adding the values as per parameters.
+        val board = Board(
+
+            // Name of the Board
+            binding.etBoardName.text.toString(),
+
+            // Image Path
+            mBoardImageURL,
+
+            // Username
+            mUserName,
+
+            // Assign User to the ArrayList
+            assignedUsersArrayList
+        )
+
+        // Create actual Board in the Firestore (Activity, board (details))
+        FirestoreClass().createBoard(this@CreateBoardActivity, board)
     }
 
     /**
