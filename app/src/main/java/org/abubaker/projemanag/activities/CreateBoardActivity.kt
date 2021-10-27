@@ -216,6 +216,8 @@ class CreateBoardActivity : BaseActivity() {
      * A function to upload the Board Image to storage and getting the downloadable URL of the image.
      */
     private fun uploadBoardImage() {
+
+        // Progress Dialog Message: Please wait
         showProgressDialog(resources.getString(R.string.please_wait))
 
         //getting the storage reference
@@ -228,15 +230,15 @@ class CreateBoardActivity : BaseActivity() {
             )
         )
 
-        //adding the file to reference
+        //adding the selected file to reference
         sRef.putFile(mSelectedImageFileUri!!)
 
             // On: Success
             .addOnSuccessListener { taskSnapshot ->
 
-                // The image upload is success
+                // Log: Prints the path/location where the image will be stored
                 Log.e(
-                    "Firebase Image URL",
+                    "Board Image URL",
                     taskSnapshot.metadata!!.reference!!.downloadUrl.toString()
                 )
 
