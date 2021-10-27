@@ -13,6 +13,8 @@ import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import org.abubaker.projemanag.R
 import org.abubaker.projemanag.databinding.ActivityCreateBoardBinding
+import org.abubaker.projemanag.firebase.FirestoreClass
+import org.abubaker.projemanag.models.Board
 import org.abubaker.projemanag.utils.Constants
 import java.io.IOException
 
@@ -26,6 +28,9 @@ class CreateBoardActivity : BaseActivity() {
 
     // Catch the data sent by MainActivity
     private lateinit var mUserName: String
+
+    // A global variable for a board image URL
+    private var mBoardImageURL: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -170,6 +175,30 @@ class CreateBoardActivity : BaseActivity() {
 
             }
         }
+    }
+
+    /**
+     * A function to make an entry of a board in the database.
+     */
+    private fun createBoard() {
+
+        //  A list is created to add the assigned members.
+        //  This can be modified later on as of now the user itself will be the member of the board.
+        val assignedUsersArrayList: ArrayList<String> = ArrayList()
+
+        // adding the current user id.
+        assignedUsersArrayList.add(getCurrentUserID())
+
+        // Creating the instance of the Board and adding the values as per parameters.
+        val board = Board(
+            binding.etBoardName.text.toString(),
+            mBoardImageURL,
+            mUserName,
+            assignedUsersArrayList
+        )
+
+        //
+        FirestoreClass().createBoard(this@CreateBoardActivity, board)
     }
 
     /**
