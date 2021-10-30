@@ -20,13 +20,14 @@
             android:elevation="@dimen/card_view_elevation"
             app:cardCornerRadius="@dimen/card_view_corner_radius">
 
+            <!-- RecyclerView (Initially Hiddens) -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_boards_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="gone" />
 
-            <!-- No Boards are available -->
+            <!-- Default Message: No Boards are available -->
             <TextView
                 android:id="@+id/tv_no_boards_available"
                 android:layout_width="match_parent"
