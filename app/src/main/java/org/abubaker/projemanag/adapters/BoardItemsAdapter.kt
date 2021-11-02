@@ -3,7 +3,6 @@ package org.abubaker.projemanag.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import org.abubaker.projemanag.R
@@ -21,6 +20,12 @@ open class BoardItemsAdapter(
     private var onClickListener: OnClickListener? = null
 
     /**
+     * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
+     */
+    private class ViewHolder(val binding: ItemBoardBinding) : RecyclerView.ViewHolder(binding.root)
+
+
+    /**
      * Inflates the item views which is designed in xml layout file
      *
      * create a new
@@ -28,15 +33,10 @@ open class BoardItemsAdapter(
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        // val binding = ItemBoardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
         // Inflate Layout (XML)
-        // binding = DataBindingUtil.setContentView(this@BoardItemsAdapter, R.layout.activity_main)
         binding = ItemBoardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
 
-        return MyViewHolder(
-            binding
-        )
     }
 
     /**
@@ -58,7 +58,7 @@ open class BoardItemsAdapter(
         // Get Current position
         val model = list[position]
 
-        if (holder is MyViewHolder) {
+        if (holder is ViewHolder) {
 
             Glide
                 .with(context)
@@ -102,8 +102,4 @@ open class BoardItemsAdapter(
         fun onClick(position: Int, model: Board)
     }
 
-    /**
-     * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
-     */
-    private class MyViewHolder(view: ItemBoardBinding) : RecyclerView.ViewHolder(view)
 }
