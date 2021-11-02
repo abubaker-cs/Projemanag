@@ -105,7 +105,12 @@ open class BoardItemsAdapter(
      * An interface for onclick items.
      */
     interface OnClickListener {
-        fun onClick(position: Int, model: Board)
+
+        fun onClick(
+            position: Int,
+            model: Board
+        )
+
     }
 
 }
