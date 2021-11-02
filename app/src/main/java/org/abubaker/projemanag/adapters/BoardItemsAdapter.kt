@@ -22,7 +22,7 @@ open class BoardItemsAdapter(
     /**
      * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
      */
-    private class ViewHolder(val binding: ItemBoardBinding) : RecyclerView.ViewHolder(binding.root)
+    private class ViewHolder(binding: ItemBoardBinding) : RecyclerView.ViewHolder(binding.root)
 
 
     /**
@@ -55,11 +55,13 @@ open class BoardItemsAdapter(
 //            with(list[position]){}
 //        }
 
-        // Get Current position
+        // Get Current position of the list item
         val model = list[position]
 
+        // Validate first
         if (holder is ViewHolder) {
 
+            // Thumbnail
             Glide
                 .with(context)
                 .load(model.image)
@@ -68,9 +70,13 @@ open class BoardItemsAdapter(
                 .into(binding.ivBoardImage)
 
 
+            // Username
             binding.tvName.text = model.name
+
+            // Created by?
             binding.tvCreatedBy.text = "Created By : ${model.createdBy}"
 
+            // Event: On clicking the row (item)
             holder.itemView.setOnClickListener {
 
                 if (onClickListener != null) {
