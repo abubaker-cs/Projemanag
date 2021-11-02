@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.GravityCompat
@@ -16,6 +17,7 @@ import org.abubaker.projemanag.R
 import org.abubaker.projemanag.databinding.ActivityMainBinding
 import org.abubaker.projemanag.databinding.NavHeaderMainBinding
 import org.abubaker.projemanag.firebase.FirestoreClass
+import org.abubaker.projemanag.models.Board
 import org.abubaker.projemanag.models.User
 import org.abubaker.projemanag.utils.Constants
 
@@ -188,25 +190,31 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         // Username
         headerView.findViewById<TextView>(R.id.tv_username).text = user.name
+    }
 
+    /**
+     * A function to populate the result of BOARDS list in the UI i.e in the recyclerView.
+     */
+    fun populateBoardsListToUI(boardsList: ArrayList<Board>) {
 
-//  TODO: NavHeaderMainBinding.bind(headerView) is crashing the app after data is being updated
-//
-//        val headerView = binding.navView.getHeaderView(0)
-//        val headerBinding = NavHeaderMainBinding.bind(headerView)
-//
-//
-//        // Profile Image
-//        Glide
-//            .with(this@MainActivity)
-//            .load(user.image)
-//            .centerCrop()
-//            .placeholder(R.drawable.ic_user_place_holder)
-//            .into(headerBinding.ivProfileUserImage)
-//
-//        // Username
-//        headerBinding.tvUsername.text = user.name
+        hideProgressDialog()
 
+        if (boardsList.size > 0) {
+
+            binding.rvBoardsList.visibility = View.VISIBLE
+
+            tv_no_boards_available.visibility = View.GONE
+
+            rv_boards_list.layoutManager = LinearLayoutManager(this@MainActivity)
+            rv_boards_list.setHasFixedSize(true)
+
+            // Create an instance of BoardItemsAdapter and pass the boardList to it.
+            val adapter = BoardItemsAdapter(this@MainActivity, boardsList)
+            rv_boards_list.adapter = adapter // Attach the adapter to the recyclerView.
+        } else {
+            rv_boards_list.visibility = View.GONE
+            tv_no_boards_available.visibility = View.VISIBLE
+        }
     }
 
     /**
