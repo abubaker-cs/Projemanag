@@ -2,17 +2,21 @@ package org.abubaker.projemanag.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import org.abubaker.projemanag.R
+import org.abubaker.projemanag.databinding.ItemBoardBinding
 import org.abubaker.projemanag.models.Board
 
 open class BoardItemsAdapter(
     private val context: Context,
     private var list: ArrayList<Board>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    // Binding Object
+    private lateinit var binding: ItemBoardBinding
 
     private var onClickListener: OnClickListener? = null
 
@@ -24,12 +28,14 @@ open class BoardItemsAdapter(
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
+        // val binding = ItemBoardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        // Inflate Layout (XML)
+        // binding = DataBindingUtil.setContentView(this@BoardItemsAdapter, R.layout.activity_main)
+        binding = ItemBoardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
         return MyViewHolder(
-            LayoutInflater.from(context).inflate(
-                R.layout.item_board,
-                parent,
-                false
-            )
+            binding
         )
     }
 
@@ -44,6 +50,12 @@ open class BoardItemsAdapter(
      * layout file.
      */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
+//        with(holder){
+//            with(list[position]){}
+//        }
+
+        // Get Current position
         val model = list[position]
 
         if (holder is MyViewHolder) {
@@ -53,16 +65,18 @@ open class BoardItemsAdapter(
                 .load(model.image)
                 .centerCrop()
                 .placeholder(R.drawable.ic_board_place_holder)
-                .into(holder.itemView.iv_board_image)
+                .into(binding.ivBoardImage)
 
-            holder.itemView.tv_name.text = model.name
-            holder.itemView.tv_created_by.text = "Created By : ${model.createdBy}"
+
+            binding.tvName.text = model.name
+            binding.tvCreatedBy.text = "Created By : ${model.createdBy}"
 
             holder.itemView.setOnClickListener {
 
                 if (onClickListener != null) {
                     onClickListener!!.onClick(position, model)
                 }
+
             }
         }
     }
@@ -91,5 +105,5 @@ open class BoardItemsAdapter(
     /**
      * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
      */
-    private class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    private class MyViewHolder(view: ItemBoardBinding) : RecyclerView.ViewHolder(view)
 }
