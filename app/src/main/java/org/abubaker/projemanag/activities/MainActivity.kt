@@ -10,10 +10,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import org.abubaker.projemanag.R
+import org.abubaker.projemanag.adapters.BoardItemsAdapter
 import org.abubaker.projemanag.databinding.ActivityMainBinding
 import org.abubaker.projemanag.databinding.NavHeaderMainBinding
 import org.abubaker.projemanag.firebase.FirestoreClass
@@ -197,9 +199,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
      */
     fun populateBoardsListToUI(boardsList: ArrayList<Board>) {
 
+        //
         hideProgressDialog()
 
         if (boardsList.size > 0) {
+
 
             binding.rvBoardsList.visibility = View.VISIBLE
 
@@ -211,9 +215,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             // Create an instance of BoardItemsAdapter and pass the boardList to it.
             val adapter = BoardItemsAdapter(this@MainActivity, boardsList)
             rv_boards_list.adapter = adapter // Attach the adapter to the recyclerView.
+
         } else {
+
             rv_boards_list.visibility = View.GONE
             tv_no_boards_available.visibility = View.VISIBLE
+        
         }
     }
 
