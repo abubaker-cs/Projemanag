@@ -13,12 +13,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Projemanag">
-
+        <activity
+            android:name=".activities.TaskListActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".activities.BaseActivity"
-            android:exported="true" />
-
-        <!-- Splash -->
+            android:exported="true" /> <!-- Splash -->
         <activity
             android:name=".activities.SplashActivity"
             android:exported="true"
@@ -29,44 +31,32 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Intro -->
+        </activity> <!-- Intro -->
         <activity
             android:name=".activities.IntroActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
-
-        <!-- Main -->
+            android:theme="@style/NoActionBar" /> <!-- Main -->
         <activity
             android:name=".activities.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
-
-        <!-- Create Board -->
+            android:theme="@style/NoActionBar" /> <!-- Create Board -->
         <activity
             android:name=".activities.CreateBoardActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
-
-        <!-- Sign Up -->
+            android:theme="@style/NoActionBar" /> <!-- Sign Up -->
         <activity
             android:name=".activities.SignUpActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
-
-        <!-- Sign In -->
+            android:theme="@style/NoActionBar" /> <!-- Sign In -->
         <activity
             android:name=".activities.SignInActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar" />
-
-        <!-- My Profile -->
+            android:theme="@style/NoActionBar" /> <!-- My Profile -->
         <activity
             android:name=".activities.MyProfileActivity"
             android:exported="true"
