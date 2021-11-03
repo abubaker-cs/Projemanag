@@ -262,6 +262,24 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             val adapter = BoardItemsAdapter(this@MainActivity, boardsList)
             findViewById<RecyclerView>(R.id.rv_boards_list).adapter = adapter
 
+            // Click event for boards item and launch the TaskListActivity
+            adapter.setOnClickListener(object :
+                BoardItemsAdapter.OnClickListener {
+                override fun onClick(position: Int, model: Board) {
+
+                    startActivity(
+
+                        // Open TaskListActivity
+                        Intent(
+                            this@MainActivity,
+                            TaskListActivity::class.java
+                        )
+
+                    )
+
+                }
+            })
+
         } else {
 
             // Toggling the views: Board List + No Boards Available
