@@ -237,6 +237,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             // Create an instance of BoardItemsAdapter and pass the boardList to it.
             val adapter = BoardItemsAdapter(this@MainActivity, boardsList)
 
+            // Log: Total Items?
+            Log.i("POPUI:", "Board adapter size: ${adapter.itemCount}")
+
             // Attach the adapter to the recyclerView.
             contentMainBinding.rvBoardsList.adapter = adapter
 
