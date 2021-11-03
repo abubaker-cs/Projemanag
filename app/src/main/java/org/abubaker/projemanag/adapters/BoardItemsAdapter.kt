@@ -14,15 +14,12 @@ open class BoardItemsAdapter(
     private var list: ArrayList<Board>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    // Binding Object
-    private lateinit var binding: ItemBoardBinding
-
     private var onClickListener: OnClickListener? = null
 
     /**
      * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
      */
-    private class ViewHolder(binding: ItemBoardBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(val binding: ItemBoardBinding) : RecyclerView.ViewHolder(binding.root)
 
 
     /**
@@ -34,7 +31,7 @@ open class BoardItemsAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         // Inflate Layout (XML)
-        binding = ItemBoardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemBoardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
 
     }
@@ -51,10 +48,6 @@ open class BoardItemsAdapter(
      */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-//        with(holder){
-//            with(list[position]){}
-//        }
-
         // Get Current position of the list item
         val model = list[position]
 
@@ -67,14 +60,14 @@ open class BoardItemsAdapter(
                 .load(model.image)
                 .centerCrop()
                 .placeholder(R.drawable.ic_board_place_holder)
-                .into(binding.ivBoardImage)
+                .into(holder.binding.ivBoardImage)
 
 
             // Username
-            binding.tvName.text = model.name
+            holder.binding.tvName.text = model.name
 
             // Created by?
-            binding.tvCreatedBy.text = "Created By : ${model.createdBy}"
+            holder.binding.tvCreatedBy.text = "Created By : ${model.createdBy}"
 
             // Event: On clicking the row (item)
             holder.itemView.setOnClickListener {

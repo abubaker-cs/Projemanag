@@ -204,7 +204,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         if (boardsList.size > 0) {
 
-
+            // binding.mainAppBarLayout = View.VISIBLE
+                
             binding.rvBoardsList.visibility = View.VISIBLE
 
             tv_no_boards_available.visibility = View.GONE
@@ -220,7 +221,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
             rv_boards_list.visibility = View.GONE
             tv_no_boards_available.visibility = View.VISIBLE
-        
+
         }
     }
 
