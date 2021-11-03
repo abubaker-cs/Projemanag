@@ -34,6 +34,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         //A unique code for starting the activity for result
         val MY_PROFILE_REQUEST_CODE: Int = 11
 
+        // A unique code for starting the create board activity for result
+        const val CREATE_BOARD_REQUEST_CODE: Int = 12
+
     }
 
     // Binding Object
@@ -75,7 +78,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             intent.putExtra(Constants.NAME, mUserName)
 
             // Initialize the intent
-            startActivity(intent)
+            // startActivity(intent)
+
+            // Here now pass the unique code for StartActivityForResult
+            startActivityForResult(intent, CREATE_BOARD_REQUEST_CODE)
+
         }
 
     }
@@ -279,6 +286,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
             // Get the user updated details, so the Thumbnail can be refreshed in the Drawer
             FirestoreClass().loadUserData(this@MainActivity)
+
+        } else if (resultCode == Activity.RESULT_OK && requestCode == CREATE_BOARD_REQUEST_CODE) {
+
+            // Get the latest boards list.
+            FirestoreClass().getBoardsList(this@MainActivity)
 
         } else {
 
