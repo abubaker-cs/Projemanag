@@ -194,6 +194,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         // Username
         headerView.findViewById<TextView>(R.id.tv_username).text = user.name
+
     }
 
     /**
@@ -204,16 +205,17 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // Binding the content_main.xml file
         val contentMainBinding = ContentMainBinding.inflate(layoutInflater)
 
-        //
+        // Hide the Progress Dialog if it is still active
         hideProgressDialog()
 
+        // If the List has records
         if (boardsList.size > 0) {
 
             // Toggling the views: Board List + No Boards Available
             contentMainBinding.rvBoardsList.visibility = View.VISIBLE
             contentMainBinding.tvNoBoardsAvailable.visibility = View.GONE
 
-            //
+            // We are choosing a Linear Layout
             contentMainBinding.rvBoardsList.layoutManager = LinearLayoutManager(this@MainActivity)
 
             //
