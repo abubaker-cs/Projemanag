@@ -278,16 +278,19 @@ class FirestoreClass {
                     boardsList.add(board)
                 }
 
-                // Here pass the result to the base activity.
+                // Populate the Activity by passing the result to the base activity.
                 activity.populateBoardsListToUI(boardsList)
             }
 
             // On: Failure
             .addOnFailureListener { e ->
 
+                // Hide the Progress Dialog
                 activity.hideProgressDialog()
 
+                // Log: Error
                 Log.e(activity.javaClass.simpleName, "Error while creating a board.", e)
+
             }
     }
 
