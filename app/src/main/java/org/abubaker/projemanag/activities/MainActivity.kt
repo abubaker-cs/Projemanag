@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
@@ -19,7 +18,6 @@ import org.abubaker.projemanag.R
 import org.abubaker.projemanag.adapters.BoardItemsAdapter
 import org.abubaker.projemanag.databinding.ActivityMainBinding
 import org.abubaker.projemanag.databinding.ContentMainBinding
-import org.abubaker.projemanag.databinding.ItemBoardBinding
 import org.abubaker.projemanag.firebase.FirestoreClass
 import org.abubaker.projemanag.models.Board
 import org.abubaker.projemanag.models.User
@@ -219,6 +217,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         // Binding the content_main.xml file
         val contentMainBinding = ContentMainBinding.inflate(layoutInflater)
+
+        // Very Important Step: This will make sure that the view is inflated at top level of the activity
+        setContentView(contentMainBinding.root)
 
         // Hide the Progress Dialog if it is still active
         hideProgressDialog()
