@@ -256,6 +256,7 @@ class FirestoreClass {
             // Will get the documents snapshots.
             .get()
 
+            // On: Success
             .addOnSuccessListener { document ->
 
                 // Here we get the list of boards in the form of documents.
@@ -267,15 +268,21 @@ class FirestoreClass {
                 // A for loop as per the list of documents to convert them into Boards ArrayList.
                 for (i in document.documents) {
 
+                    // We are saving the instance of the "OBJECT" to our board variable
                     val board = i.toObject(Board::class.java)!!
+
+                    // Fetch the documentId
                     board.documentId = i.id
 
+                    // Add record in the boardsList
                     boardsList.add(board)
                 }
 
                 // Here pass the result to the base activity.
                 activity.populateBoardsListToUI(boardsList)
             }
+
+            // On: Failure
             .addOnFailureListener { e ->
 
                 activity.hideProgressDialog()
