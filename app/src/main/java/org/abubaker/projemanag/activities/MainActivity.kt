@@ -57,9 +57,13 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // Assign the NavigationView.OnNavigationItemSelectedListener to navigation view.
         binding.navView.setNavigationItemSelectedListener(this)
 
-        // Load user's data from the database
+        // Dialog Message: Please Wait
+        showProgressDialog(resources.getString(R.string.please_wait))
+
+        // Get the current logged in user details.
         // >>> Now depending on the type of Activity, i.e. MainActivity or SignInActivity
-        FirestoreClass().loadUserData(this)
+        // >>> Here pass the parameter value as TRUE to read the boards rest all are FALSE.
+        FirestoreClass().loadUserData(this, true)
 
         // FAB: Launch the Create Board screen on a fab button click.
         binding.mainAppBarLayout.fabCreateBoard.setOnClickListener {
@@ -174,7 +178,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     // We want to load image from the User Object (downloaded from Firebase)
     // defined as image variable in the models/User.kt file
     // val image: String = "",
-    fun updateNavigationUserDetails(user: User) {
+    // isToReadBoardsList: To check whether to read the boards list or not
+    fun updateNavigationUserDetails(user: User, isToReadBoardsList: Boolean) {
 
         // Based on solution provided by Helder
         // URL: https://www.udemy.com/course/android-kotlin-developer/learn/lecture/18301726#questions/14389880
@@ -194,6 +199,16 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         // Username
         headerView.findViewById<TextView>(R.id.tv_username).text = user.name
+
+        // Here if the isToReadBoardList is TRUE then get the list of boards.
+        if (isToReadBoardsList) {
+
+            // Dialog: Please Wait
+            showProgressDialog(resources.getString(R.string.please_wait))
+
+            // Populate DATA from the FireStore
+            FirestoreClass().getBoardsList(this@MainActivity)
+        }
 
     }
 
@@ -217,8 +232,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
             // We are choosing a Linear Layout
             contentMainBinding.rvBoardsList.layoutManager = LinearLayoutManager(this@MainActivity)
-
-            //
             contentMainBinding.rvBoardsList.setHasFixedSize(true)
 
             // Create an instance of BoardItemsAdapter and pass the boardList to it.
