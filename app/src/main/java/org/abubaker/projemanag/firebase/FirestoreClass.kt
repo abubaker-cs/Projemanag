@@ -250,7 +250,7 @@ class FirestoreClass {
         // The collection name for BOARDS
         mFireStore.collection(Constants.BOARDS)
 
-            // A where array query as we want the list of the board in which the user is assigned. So here you can pass the current user id.
+            // Array query as we want the list of the board in which the user is assigned. So here you can pass the current user id.
             .whereArrayContains(Constants.ASSIGNED_TO, getCurrentUserID())
 
             // Will get the documents snapshots.

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.MediaStore
 import android.webkit.MimeTypeMap
-import org.abubaker.projemanag.activities.MyProfileActivity
 
 /**
  * It will define USERS collection constant value
