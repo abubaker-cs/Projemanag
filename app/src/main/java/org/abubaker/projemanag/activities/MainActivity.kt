@@ -11,17 +11,18 @@ import android.widget.TextView
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import org.abubaker.projemanag.R
 import org.abubaker.projemanag.adapters.BoardItemsAdapter
 import org.abubaker.projemanag.databinding.ActivityMainBinding
-import org.abubaker.projemanag.databinding.ContentMainBinding
 import org.abubaker.projemanag.firebase.FirestoreClass
 import org.abubaker.projemanag.models.Board
 import org.abubaker.projemanag.models.User
 import org.abubaker.projemanag.utils.Constants
+
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -216,10 +217,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     fun populateBoardsListToUI(boardsList: ArrayList<Board>) {
 
         // Binding the content_main.xml file
-        val contentMainBinding = ContentMainBinding.inflate(layoutInflater)
+        // val contentMainBinding = ContentMainBinding.inflate(layoutInflater)
 
-        // Very Important Step: This will make sure that the view is inflated at top level of the activity
-        setContentView(contentMainBinding.root)
+        // TODO Very Important Step: This will make sure that the view is inflated at top level of the activity
+        // setContentView(contentMainBinding.root)
 
         // Hide the Progress Dialog if it is still active
         hideProgressDialog()
@@ -228,27 +229,40 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         if (boardsList.size > 0) {
 
             // Toggling the views: Board List + No Boards Available
-            contentMainBinding.rvBoardsList.visibility = View.VISIBLE
-            contentMainBinding.tvNoBoardsAvailable.visibility = View.GONE
+            // contentMainBinding.rvBoardsList.visibility = View.VISIBLE
+            // contentMainBinding.tvNoBoardsAvailable.visibility = View.GONE
 
             // We are choosing a Linear Layout
-            contentMainBinding.rvBoardsList.layoutManager = LinearLayoutManager(this@MainActivity)
-            contentMainBinding.rvBoardsList.setHasFixedSize(true)
+            // contentMainBinding.rvBoardsList.layoutManager = LinearLayoutManager(this@MainActivity)
+            // contentMainBinding.rvBoardsList.setHasFixedSize(true)
 
             // Create an instance of BoardItemsAdapter and pass the boardList to it.
-            val adapter = BoardItemsAdapter(this@MainActivity, boardsList)
+            // val adapter = BoardItemsAdapter(this@MainActivity, boardsList)
 
             // Log: Total Items?
-            Log.i("POPUI:", "Board adapter size: ${adapter.itemCount}")
+            // Log.i("POPUI:", "Board adapter size: ${adapter.itemCount}")
 
             // Attach the adapter to the recyclerView.
-            contentMainBinding.rvBoardsList.adapter = adapter
+            // contentMainBinding.rvBoardsList.adapter = adapter
+
+            findViewById<RecyclerView>(R.id.rv_boards_list).visibility = View.VISIBLE
+            findViewById<TextView>(R.id.tv_no_boards_available).visibility = View.GONE
+
+            findViewById<RecyclerView>(R.id.rv_boards_list).layoutManager =
+                LinearLayoutManager(this@MainActivity)
+            findViewById<RecyclerView>(R.id.rv_boards_list).setHasFixedSize(true)
+
+            val adapter = BoardItemsAdapter(this@MainActivity, boardsList)
+            findViewById<RecyclerView>(R.id.rv_boards_list).adapter = adapter
 
         } else {
 
             // Toggling the views: Board List + No Boards Available
-            contentMainBinding.rvBoardsList.visibility = View.GONE
-            contentMainBinding.tvNoBoardsAvailable.visibility = View.VISIBLE
+            // contentMainBinding.rvBoardsList.visibility = View.GONE
+            // contentMainBinding.tvNoBoardsAvailable.visibility = View.VISIBLE
+
+            findViewById<RecyclerView>(R.id.rv_boards_list).visibility = View.GONE
+            findViewById<TextView>(R.id.tv_no_boards_available).visibility = View.VISIBLE
 
         }
     }
