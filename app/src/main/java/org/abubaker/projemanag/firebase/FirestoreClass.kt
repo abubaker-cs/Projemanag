@@ -311,7 +311,7 @@ class FirestoreClass {
                 // Log
                 Log.e(activity.javaClass.simpleName, document.toString())
 
-                // Send the result of board to the base activity.
+                //
                 activity.boardDetails(document.toObject(Board::class.java)!!)
 
             }
