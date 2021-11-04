@@ -37,6 +37,7 @@ class TaskListActivity : BaseActivity() {
 
     /**
      * A function to setup action bar
+     * title: It will be used to fetch the title for the active board
      */
     private fun setupActionBar(title: String) {
 
@@ -53,7 +54,7 @@ class TaskListActivity : BaseActivity() {
             // Enable < icon
             actionBar.setHomeAsUpIndicator(R.drawable.ic_white_color_back_24dp)
 
-            // Updated the Board's Title in the ActionBar
+            // Updated the Board's Title in the ActionBar using the received "title: String"
             actionBar.title = title
         }
 
