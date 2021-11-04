@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
-import org.abubaker.projemanag.R
+import org.abubaker.projemanag.databinding.ItemTaskBinding
 import org.abubaker.projemanag.models.Task
 
 open class TaskListItemsAdapter(
@@ -18,7 +18,8 @@ open class TaskListItemsAdapter(
     /**
      * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
      */
-    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    // class MyViewHolder(view: @NonNull ItemTaskBinding) : RecyclerView.ViewHolder(view)
+    inner class MyViewHolder(val binding: ItemTaskBinding) : RecyclerView.ViewHolder(binding.root)
 
     /**
      * Inflates the item views which is designed in xml layout file
@@ -28,8 +29,11 @@ open class TaskListItemsAdapter(
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        // TODO (Step 6: Here we have done some additional changes to display the item of the task list item in 70% of the screen size.)
-        val view = LayoutInflater.from(context).inflate(R.layout.item_task, parent, false)
+        // Inflate Layout (XML)
+        val binding = ItemTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+
+        // val view = LayoutInflater.from(context).inflate(R.layout.item_task, parent, false)
 
         // Here the layout params are converted dynamically according to the screen size as width is 70% and height is wrap_content.
         val layoutParams = LinearLayout.LayoutParams(
@@ -40,9 +44,11 @@ open class TaskListItemsAdapter(
         // Here the dynamic margins are applied to the view.
         layoutParams.setMargins((15.toDp()).toPx(), 0, (40.toDp()).toPx(), 0)
 
-        view.layoutParams = layoutParams
+        binding.root.layoutParams = layoutParams
 
-        return MyViewHolder(view)
+        // view.layoutParams = layoutParams
+
+        return MyViewHolder(binding)
     }
 
     /**
@@ -61,11 +67,12 @@ open class TaskListItemsAdapter(
         if (holder is MyViewHolder) {
 
             if (position == list.size - 1) {
-                // holder.itemView.tv_add_task_list.visibility = View.VISIBLE
-                // holder.itemView.ll_task_item.visibility = View.GONE
+
+                holder.itemView.tv_add_task_list.visibility = View.VISIBLE
+                holder.itemView.ll_task_item.visibility = View.GONE
             } else {
-                // holder.itemView.tv_add_task_list.visibility = View.GONE
-                // holder.itemView.ll_task_item.visibility = View.VISIBLE
+                holder.itemView.tv_add_task_list.visibility = View.GONE
+                holder.itemView.ll_task_item.visibility = View.VISIBLE
             }
 
         }

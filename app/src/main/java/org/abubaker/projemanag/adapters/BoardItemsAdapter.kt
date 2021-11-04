@@ -17,7 +17,7 @@ open class BoardItemsAdapter(
     private var onClickListener: OnClickListener? = null
 
     /**
-     * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
+     * A ViewHolder describes an item view and metadata about its place within the RecyclerView.onBindViewHolder
      */
     inner class ViewHolder(val binding: ItemBoardBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -32,6 +32,7 @@ open class BoardItemsAdapter(
 
         // Inflate Layout (XML)
         val binding = ItemBoardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
         return ViewHolder(binding)
 
     }
