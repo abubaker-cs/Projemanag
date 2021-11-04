@@ -20,7 +20,6 @@ class TaskListActivity : BaseActivity() {
         // Inflate Layout (XML)
         binding = DataBindingUtil.setContentView(this@TaskListActivity, R.layout.activity_task_list)
 
-
         // Get the board documentId through intent.
         var boardDocumentId = ""
 
@@ -31,7 +30,7 @@ class TaskListActivity : BaseActivity() {
         // Show the progress dialog.
         showProgressDialog(resources.getString(R.string.please_wait))
 
-        //
+        // Get the Board Details
         FirestoreClass().getBoardDetails(this@TaskListActivity, boardDocumentId)
 
     }
@@ -41,17 +40,27 @@ class TaskListActivity : BaseActivity() {
      */
     private fun setupActionBar(title: String) {
 
+        // Pick the ActionBar to change
         setSupportActionBar(binding.toolbarTaskListActivity)
 
         val actionBar = supportActionBar
 
         if (actionBar != null) {
+
+            // Activate the functionality for the < Back Button
             actionBar.setDisplayHomeAsUpEnabled(true)
+
+            // Enable < icon
             actionBar.setHomeAsUpIndicator(R.drawable.ic_white_color_back_24dp)
+
+            // Updated the Board's Title in the ActionBar
             actionBar.title = title
         }
 
-        binding.toolbarTaskListActivity.setNavigationOnClickListener { onBackPressed() }
+        // Action for the < Button
+        binding.toolbarTaskListActivity.setNavigationOnClickListener {
+            onBackPressed()
+        }
     }
 
     /**
