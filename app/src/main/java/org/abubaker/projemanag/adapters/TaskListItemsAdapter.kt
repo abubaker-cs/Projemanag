@@ -16,6 +16,11 @@ open class TaskListItemsAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     /**
+     * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
+     */
+    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
+    /**
      * Inflates the item views which is designed in xml layout file
      *
      * create a new
@@ -85,8 +90,4 @@ open class TaskListItemsAdapter(
     private fun Int.toPx(): Int =
         (this * Resources.getSystem().displayMetrics.density).toInt()
 
-    /**
-     * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
-     */
-    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
 }
