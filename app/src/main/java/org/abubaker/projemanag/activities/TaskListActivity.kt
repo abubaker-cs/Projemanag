@@ -2,10 +2,13 @@ package org.abubaker.projemanag.activities
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import org.abubaker.projemanag.R
+import org.abubaker.projemanag.adapters.TaskListItemsAdapter
 import org.abubaker.projemanag.databinding.ActivityTaskListBinding
 import org.abubaker.projemanag.firebase.FirestoreClass
 import org.abubaker.projemanag.models.Board
+import org.abubaker.projemanag.models.Task
 import org.abubaker.projemanag.utils.Constants
 
 class TaskListActivity : BaseActivity() {
@@ -74,6 +77,20 @@ class TaskListActivity : BaseActivity() {
 
         // Call the function to setup action bar.
         setupActionBar(board.name)
+
+        // TODO (Step 7: Setup the task list view using the adapter class and task list of the board.)
+        // Here we are appending an item view for adding a list task list for the board.
+        val addTaskList = Task(resources.getString(R.string.add_list))
+        board.taskList.add(addTaskList)
+
+        binding.rvTaskList.layoutManager =
+            LinearLayoutManager(this@TaskListActivity, LinearLayoutManager.HORIZONTAL, false)
+
+        binding.rvTaskList.setHasFixedSize(true)
+
+        // Create an instance of TaskListItemsAdapter and pass the task list to it.
+        val adapter = TaskListItemsAdapter(this@TaskListActivity, board.taskList)
+        binding.rvTaskList.adapter = adapter // Attach the adapter to the recyclerView.
 
     }
 
