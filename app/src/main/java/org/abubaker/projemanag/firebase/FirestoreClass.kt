@@ -295,6 +295,39 @@ class FirestoreClass {
     }
 
     /**
+     * A function to get the Board Details.
+     */
+    fun getBoardDetails(activity: TaskListActivity, documentId: String) {
+
+        mFireStore.collection(Constants.BOARDS)
+
+            .document(documentId)
+
+            .get()
+
+            // On: Success
+            .addOnSuccessListener { document ->
+
+                // Log
+                Log.e(activity.javaClass.simpleName, document.toString())
+
+                // Send the result of board to the base activity.
+                activity.boardDetails(document.toObject(Board::class.java)!!)
+
+            }
+
+            // On: Failure
+            .addOnFailureListener { e ->
+
+                // Hide Progress Dialog
+                activity.hideProgressDialog()
+
+                // Log: Error
+                Log.e(activity.javaClass.simpleName, "Error while creating a board.", e)
+            }
+    }
+
+    /**
      * A function for getting the user id of current logged user.
      */
     fun getCurrentUserID(): String {

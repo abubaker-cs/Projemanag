@@ -267,15 +267,14 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 BoardItemsAdapter.OnClickListener {
                 override fun onClick(position: Int, model: Board) {
 
-                    startActivity(
+                    // Basic structure of the Intent
+                    val intent = Intent(this@MainActivity, TaskListActivity::class.java)
 
-                        // Open TaskListActivity
-                        Intent(
-                            this@MainActivity,
-                            TaskListActivity::class.java
-                        )
+                    // We are passing model.documentId through DOCUMENT_ID
+                    intent.putExtra(Constants.DOCUMENT_ID, model.documentId)
 
-                    )
+                    // Open TaskListActivity
+                    startActivity(intent)
 
                 }
             })

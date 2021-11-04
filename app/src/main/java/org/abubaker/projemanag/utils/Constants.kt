@@ -30,6 +30,10 @@ object Constants {
     // A constant for image selection from phone storage
     const val PICK_IMAGE_REQUEST_CODE = 2
 
+    // We will pass "Document id" one the individual boards will be clicked
+    // in the MainActivity to start the Intent
+    const val DOCUMENT_ID: String = "documentId"
+
     /**
      * A function for user profile image selection from phone storage.
      */
