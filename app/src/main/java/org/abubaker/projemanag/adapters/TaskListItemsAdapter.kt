@@ -42,11 +42,11 @@ open class TaskListItemsAdapter(
         )
 
         // Here the dynamic margins are applied to the view.
+        // Order: Left, Top, Right, Bottom
         layoutParams.setMargins((15.toDp()).toPx(), 0, (40.toDp()).toPx(), 0)
 
+        // Assign changes to the RecyclerView in the UI
         binding.root.layoutParams = layoutParams
-
-        // view.layoutParams = layoutParams
 
         return ViewHolder(binding)
     }
@@ -80,7 +80,7 @@ open class TaskListItemsAdapter(
                 // If we have entries in the list
                 holder.binding.tvAddTaskList.visibility = View.GONE
                 holder.binding.llTaskItem.visibility = View.VISIBLE
-            
+
             }
 
         }

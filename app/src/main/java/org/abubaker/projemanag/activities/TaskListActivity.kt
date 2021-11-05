@@ -78,7 +78,6 @@ class TaskListActivity : BaseActivity() {
         // Call the function to setup action bar.
         setupActionBar(board.name)
 
-        // TODO (Step 7: Setup the task list view using the adapter class and task list of the board.)
         // Here we are appending an item view for adding a list task list for the board.
         val addTaskList = Task(resources.getString(R.string.add_list))
         board.taskList.add(addTaskList)
