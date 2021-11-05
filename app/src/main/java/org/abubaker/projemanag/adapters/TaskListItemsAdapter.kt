@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import org.abubaker.projemanag.R
 import org.abubaker.projemanag.databinding.ItemTaskBinding
 import org.abubaker.projemanag.models.Task
 
@@ -29,8 +31,13 @@ open class TaskListItemsAdapter(
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
+        val layoutInflater = LayoutInflater.from(context)
+
+        val binding: ItemTaskBinding =
+            DataBindingUtil.inflate(layoutInflater, R.layout.item_task, parent, false)
+
         // Inflate Layout (XML)
-        val binding = ItemTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        // val binding2 = ItemTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
 
         // val view = LayoutInflater.from(context).inflate(R.layout.item_task, parent, false)
@@ -62,7 +69,9 @@ open class TaskListItemsAdapter(
      * layout file.
      */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val model = list[position]
+
+        // val model = list[position]
+        holder.bind(items[position])
 
         if (holder is MyViewHolder) {
 
