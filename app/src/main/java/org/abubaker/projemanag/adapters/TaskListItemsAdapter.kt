@@ -69,14 +69,18 @@ open class TaskListItemsAdapter(
 
         if (holder is ViewHolder) {
 
+            // If no records exist
             if (position == list.size - 1) {
 
                 holder.binding.tvAddTaskList.visibility = View.VISIBLE
                 holder.binding.llTaskItem.visibility = View.GONE
 
             } else {
+
+                // If we have entries in the list
                 holder.binding.tvAddTaskList.visibility = View.GONE
                 holder.binding.llTaskItem.visibility = View.VISIBLE
+            
             }
 
         }

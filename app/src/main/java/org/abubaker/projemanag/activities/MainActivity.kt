@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import org.abubaker.projemanag.R
 import org.abubaker.projemanag.adapters.BoardItemsAdapter
 import org.abubaker.projemanag.databinding.ActivityMainBinding
+import org.abubaker.projemanag.databinding.ContentMainBinding
 import org.abubaker.projemanag.firebase.FirestoreClass
 import org.abubaker.projemanag.models.Board
 import org.abubaker.projemanag.models.User
@@ -223,11 +224,17 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
      */
     fun populateBoardsListToUI(boardsList: ArrayList<Board>) {
 
+
         // Binding the content_main.xml file
         // val contentMainBinding = ContentMainBinding.inflate(layoutInflater)
 
+        // val contentMainBinding: ContentMainBinding = DataBindingUtil.setContentView(this, R.layout.content_main)
+
+        val contentMainBinding: ContentMainBinding = ContentMainBinding.inflate(layoutInflater)
+
         // TODO Very Important Step: This will make sure that the view is inflated at top level of the activity
         // setContentView(contentMainBinding.root)
+
 
         // Hide the Progress Dialog if it is still active
         hideProgressDialog()
