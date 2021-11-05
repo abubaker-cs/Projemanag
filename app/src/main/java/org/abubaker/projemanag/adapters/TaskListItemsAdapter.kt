@@ -20,8 +20,7 @@ open class TaskListItemsAdapter(
     /**
      * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
      */
-    // class MyViewHolder(view: @NonNull ItemTaskBinding) : RecyclerView.ViewHolder(view)
-    inner class MyViewHolder(val binding: ItemTaskBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(val binding: ItemTaskBinding) : RecyclerView.ViewHolder(binding.root)
 
     /**
      * Inflates the item views which is designed in xml layout file
@@ -36,12 +35,6 @@ open class TaskListItemsAdapter(
         val binding: ItemTaskBinding =
             DataBindingUtil.inflate(layoutInflater, R.layout.item_task, parent, false)
 
-        // Inflate Layout (XML)
-        // val binding2 = ItemTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
-
-        // val view = LayoutInflater.from(context).inflate(R.layout.item_task, parent, false)
-
         // Here the layout params are converted dynamically according to the screen size as width is 70% and height is wrap_content.
         val layoutParams = LinearLayout.LayoutParams(
             (parent.width * 0.7).toInt(),
@@ -55,7 +48,7 @@ open class TaskListItemsAdapter(
 
         // view.layoutParams = layoutParams
 
-        return MyViewHolder(binding)
+        return ViewHolder(binding)
     }
 
     /**
@@ -70,18 +63,20 @@ open class TaskListItemsAdapter(
      */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        // val model = list[position]
-        holder.bind(items[position])
+        val model = list[position]
 
-        if (holder is MyViewHolder) {
+        //holder.bind(list[position])
+
+        if (holder is ViewHolder) {
 
             if (position == list.size - 1) {
 
-                holder.itemView.tv_add_task_list.visibility = View.VISIBLE
-                holder.itemView.ll_task_item.visibility = View.GONE
+                holder.binding.tvAddTaskList.visibility = View.VISIBLE
+                holder.binding.llTaskItem.visibility = View.GONE
+
             } else {
-                holder.itemView.tv_add_task_list.visibility = View.GONE
-                holder.itemView.ll_task_item.visibility = View.VISIBLE
+                holder.binding.tvAddTaskList.visibility = View.GONE
+                holder.binding.llTaskItem.visibility = View.VISIBLE
             }
 
         }
