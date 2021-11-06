@@ -1,6 +1,7 @@
 package org.abubaker.projemanag.activities
 
 import android.os.Bundle
+import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.abubaker.projemanag.R
@@ -98,6 +99,41 @@ class TaskListActivity : BaseActivity() {
         val adapter = TaskListItemsAdapter(this@TaskListActivity, board.taskList)
         binding.rvTaskList.adapter = adapter // Attach the adapter to the recyclerView.
 
+    }
+
+    /**
+     * A function to get the task list name from the adapter class which we will be using to create a new task list in the database.
+     */
+    fun createTaskList(taskListName: String) {
+
+        Log.e("Task List Name", taskListName)
+
+        // Create and Assign the task details
+        val task = Task(taskListName, FirestoreClass().getCurrentUserID())
+
+        mBoardDetails.taskList.add(0, task) // Add task to the first position of ArrayList
+        mBoardDetails.taskList.removeAt(mBoardDetails.taskList.size - 1) // Remove the last position as we have added the item manually for adding the TaskList.
+
+        // Show the progress dialog.
+        showProgressDialog(resources.getString(R.string.please_wait))
+
+        FirestoreClass().addUpdateTaskList(this@TaskListActivity, mBoardDetails)
+    }
+    // END
+
+    // TODO (Step 7: Create a function to get the result of add or updating the task list.)
+    // START
+    /**
+     * A function to get the result of add or updating the task list.
+     */
+    fun addUpdateTaskListSuccess() {
+
+        hideProgressDialog()
+
+        // Here get the updated board details.
+        // Show the progress dialog.
+        showProgressDialog(resources.getString(R.string.please_wait))
+        FirestoreClass().getBoardDetails(this@TaskListActivity, mBoardDetails.documentId)
     }
 
 

@@ -34,6 +34,8 @@ object Constants {
     // in the MainActivity to start the Intent
     const val DOCUMENT_ID: String = "documentId"
 
+    const val TASK_LIST: String = "taskList"
+
     /**
      * A function for user profile image selection from phone storage.
      */

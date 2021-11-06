@@ -332,6 +332,33 @@ class FirestoreClass {
     }
 
     /**
+     * A function to create a task list in the board detail.
+     */
+    fun addUpdateTaskList(activity: TaskListActivity, board: Board) {
+
+        val taskListHashMap = HashMap<String, Any>()
+        taskListHashMap[Constants.TASK_LIST] = board.taskList
+
+        mFireStore.collection(Constants.BOARDS)
+            .document(board.documentId)
+
+            .update(taskListHashMap)
+
+            // On: Success
+            .addOnSuccessListener {
+                Log.e(activity.javaClass.simpleName, "TaskList updated successfully.")
+
+                activity.addUpdateTaskListSuccess()
+            }
+
+            // On: Failure
+            .addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(activity.javaClass.simpleName, "Error while creating a board.", e)
+            }
+    }
+
+    /**
      * A function for getting the user id of current logged user.
      */
     fun getCurrentUserID(): String {

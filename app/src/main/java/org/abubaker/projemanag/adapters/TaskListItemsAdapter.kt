@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import org.abubaker.projemanag.R
+import org.abubaker.projemanag.activities.TaskListActivity
 import org.abubaker.projemanag.databinding.ItemTaskBinding
 import org.abubaker.projemanag.models.Task
 
@@ -65,8 +67,6 @@ open class TaskListItemsAdapter(
 
         val model = list[position]
 
-        //holder.bind(list[position])
-
         if (holder is ViewHolder) {
 
             // If no records exist
@@ -80,6 +80,39 @@ open class TaskListItemsAdapter(
                 // If we have entries in the list
                 holder.binding.tvAddTaskList.visibility = View.GONE
                 holder.binding.llTaskItem.visibility = View.VISIBLE
+
+            }
+
+            // Add a click event for showing the view for adding the task list name.
+            // And also set the task list title name.
+            holder.binding.tvTaskListTitle.text = model.title
+
+            holder.binding.tvAddTaskList.setOnClickListener {
+                holder.binding.tvAddTaskList.visibility = View.GONE
+                holder.binding.cvAddTaskListName.visibility = View.VISIBLE
+            }
+
+            // Add a click event for hiding the view for adding the task list name.
+            holder.binding.ibCloseListName.setOnClickListener {
+                holder.binding.tvAddTaskList.visibility = View.VISIBLE
+                holder.binding.cvAddTaskListName.visibility = View.GONE
+            }
+
+            // Add a click event for passing the task list name to the base activity function. To create a task list.
+            holder.binding.ibDoneListName.setOnClickListener {
+
+                val listName = holder.binding.etTaskListName.text.toString()
+
+                if (listName.isNotEmpty()) {
+
+                    // Here we check the context is an instance of the TaskListActivity.
+                    if (context is TaskListActivity) {
+                        context.createTaskList(listName)
+                    }
+
+                } else {
+                    Toast.makeText(context, "Please Enter List Name.", Toast.LENGTH_SHORT).show()
+                }
 
             }
 
