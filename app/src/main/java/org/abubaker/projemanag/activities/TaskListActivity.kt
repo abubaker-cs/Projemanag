@@ -16,6 +16,9 @@ class TaskListActivity : BaseActivity() {
     // Binding Object
     private lateinit var binding: ActivityTaskListBinding
 
+    // A global variable for Board Details.
+    private lateinit var mBoardDetails: Board
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task_list)
@@ -42,7 +45,7 @@ class TaskListActivity : BaseActivity() {
      * A function to setup action bar
      * title: It will be used to fetch the title for the active board
      */
-    private fun setupActionBar(title: String) {
+    private fun setupActionBar() {
 
         // Pick the ActionBar to change
         setSupportActionBar(binding.toolbarTaskListActivity)
@@ -57,8 +60,8 @@ class TaskListActivity : BaseActivity() {
             // Enable < icon
             actionBar.setHomeAsUpIndicator(R.drawable.ic_white_color_back_24dp)
 
-            // Updated the Board's Title in the ActionBar using the received "title: String"
-            actionBar.title = title
+            // Updated the Board's Title in the ActionBar using mBoardDetails.name
+            actionBar.title = mBoardDetails.name
         }
 
         // Action for the < Button
@@ -72,11 +75,15 @@ class TaskListActivity : BaseActivity() {
      */
     fun boardDetails(board: Board) {
 
+        // Initialize and Assign the value to the global variable for Board Details.
+        // After replace the parameter variable with global so from onwards the global variable will be used.
+        mBoardDetails = board
+
         // Hide Progress Dialog
         hideProgressDialog()
 
         // Call the function to setup action bar.
-        setupActionBar(board.name)
+        setupActionBar()
 
         // Here we are appending an item view for adding a list task list for the board.
         val addTaskList = Task(resources.getString(R.string.add_list))

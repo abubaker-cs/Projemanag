@@ -311,8 +311,12 @@ class FirestoreClass {
                 // Log
                 Log.e(activity.javaClass.simpleName, document.toString())
 
-                //
-                activity.boardDetails(document.toObject(Board::class.java)!!)
+                // Assign the board document id to the Board Detail object
+                val board = document.toObject(Board::class.java)!!
+                board.documentId = document.id
+
+                // Send the result of board to the base activity.
+                activity.boardDetails(board)
 
             }
 
